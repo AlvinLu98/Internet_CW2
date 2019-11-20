@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Log in</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" href="css/header.css">
+	<script src="javascript/login.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="logo">
+    <!-- Logo links to the home page -->
+        <a href="home.html"><img src="GALogo.jpg" alt="Greater Anglia Logo" id="logo"></a>
+    </div>
+
+    <!-- Log in button -->
+    <button onclick="location.href='login.html'" id="Login" style="display: none" class="button">Login</button>
+
+    <!-- Log out button -->
+    <button onclick="logout()" id="logout" style="display: none" class="button">Logout</button>
+
+    <!-- Shows the user id if there's a user logged in -->
+    <p id="LoginID"></p>
+
+    <!-- Menu bar items -->
+    <div id="menuToggle" >
+        <input type="checkbox" id="menuSmall"/>
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <li><a href="home.html" class="active">Home</a></li>
+          <li><a href="contact.html">Contact & Support</a></li>
+          <li><a href="Generic_form.html">Report fault</a></li>
+          <li style="display: none;" id="engineer"><a href="engineer.html">Engineer</a></li>
+      </ul>
+    </div> 
+
+	<div id="loginForms">
+		<h2>Login</h2>
+		<!-- Shows the log in form for customers -->
+		<button  onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="button">Customer login</button>
+		
+		<!-- Log in form for normal users -->
+		<div id="id01" class="modal">
+
+			<form id="customerForm" class="modal-content animate" onsubmit=" return checkCustLogin()" method="post">
+				<div class="imgcontainer">
+					<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+					<img src="GALogo.jpg" alt="Avatar" class="avatar">
+				</div>
+
+				<div class="container">
+					<label for="uname"><b>Username</b></label>
+					<input id="uname" type="text" placeholder="Enter Username" name="uname" required>
+
+					<label for="pwd"><b>Password</b></label>
+					<input id="pwd" type="password" placeholder="Enter Password" name="psw" required>
+
+					<button type="submit" class="button">Login</button>
+					<label>
+						<input type="checkbox" checked="checked" name="remember"> Remember me
+					</label>
+				</div>
+
+				<div class="container" style="background-color:#f1f1f1">
+					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+					<span class="psw">Forgot <a href="#">password?</a></span>
+				</div>
+			</form>
+		</div>
+
+		<!-- Shows the log in form for employees -->
+		<button onclick="document.getElementById('id02').style.display='block'" style="width:auto;" class="button">Employee login</button>
+		<!-- Log in form for empployees -->
+		<div id="id02" class="modal">
+
+			<form id="employeeForm" class="modal-content animate" onsubmit=" return checkEmpLogin()" method="post">
+				<div class="imgcontainer">
+					<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+					<img src="GALogo.jpg" alt="Avatar" class="avatar">
+				</div>
+
+				<div class="container">
+					<label for="ID"><b>ID</b></label>
+					<input id="ID" type="text" placeholder="Enter ID" name="ID" required pattern="[A-Z]">
+
+					<label for="pwdE"><b>Password</b></label>
+					<input id="pwdE" type="password" placeholder="Enter Password" name="psw" required>
+
+					<button type="submit" class="button">Login</button>
+					<label>
+						<input type="checkbox" checked="checked" name="remember"> Remember me
+					</label>
+				</div>
+
+				<div class="container" style="background-color:#f1f1f1">
+					<button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+					<span class="psw">Forgot <a href="#">password?</a></span>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

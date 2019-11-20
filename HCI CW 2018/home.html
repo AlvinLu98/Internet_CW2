@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/login.css">
+  <script src="javascript/home.js"></script>
+</head>
+
+<!-- Whenever this page loads, check if there's a user logged in -->
+<body onload="checkLogin()">
+  <div class="logo">
+    <!-- Logo links to the home page -->
+        <a href="home.html"><img src="GALogo.jpg" alt="Greater Anglia Logo" id="logo"></a>
+    </div>
+
+    <!-- Log in button -->
+    <button onclick="location.href='login.html'" id="Login" style="display: none" class="button">Login</button>
+
+    <!-- Log out button -->
+    <button onclick="logout()" id="logout" style="display: none" class="button">Logout</button>
+
+    <!-- Shows the user id if there's a user logged in -->
+    <p id="LoginID"></p>
+
+    <!-- Menu bar items -->
+    <div id="menuToggle" >
+        <input type="checkbox" id="menuSmall"/>
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <li><a href="home.html" class="active">Home</a></li>
+          <li><a href="contact.html">Contact & Support</a></li>
+          <li><a href="Generic_form.html">Report fault</a></li>
+          <li style="display: none;" id="engineer"><a href="engineer.html">Engineer</a></li>
+      </ul>
+    </div> 
+
+    <!-- Shows a message when a fault reporting form is submitted -->
+    <h2 id="form_submitted"></h2>
+
+    <!-- Buttons to link to different key pages -->
+    <div id="Functions">
+        <button onclick="location.href='Generic_Form.html'" class="button"> Report a fault</button>
+        <button onclick="location.href='https://www.greateranglia.co.uk/'" class="button"> Book a train</button>
+        <button onclick=" return checkEngineer()" class="button"> Engineer's hub</button>
+    </div>
+    <hr>
+
+    <!-- Links to live departure page on main site -->
+    <form id="liveDeparture" onsubmit="return goToDeparture()">
+        <h2>Live departure</h2>
+        <p>Check live departure of a specific station here!</p>
+        <div id="stationCode">
+            <!-- List of stations -->
+            <select name="stationCode" id="stnCd" class="formItem" required>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="ACL">Acle</option>
+                <option value="ALN">Althorne (Essex)</option>
+                <option value="ATL">Attleborough</option>
+                <option value="ALR">Alresford (Essex)</option>
+                <option value="AGR">Angel road</option>
+                <option value="AUD">Audley end</option>
+                <option value="BLB">Battlesbridge</option>
+                <option value="BCC">Beccles</option>
+                <option value="BYA">Berney Arms</option>
+                <option value="BIC">Billericay</option>
+                <option value="BIS">Bishops Stortford</option>
+                <option value="BTR">Braintree</option>
+                <option value="BTP">Braintree Freeport</option>
+                <option value="BRP">Brampton (Suffolk)</option>
+                <option value="BDN">Brandon</option>
+                <option value="BMD">Brimsdown</option>
+                <option value="BXB">Broxbourne</option>
+                <option value="BDA">Brundall</option>
+                <option value="BGA">Brundall Gardens</option>
+                <option value="BUC">Buckenham (Norfolk)</option>
+                <option value="BUE">Bures</option>
+                <option value="BUU">Burnham-on-Crouch</option>
+                <option value="BSE">Bury St Edmunds</option>
+                <option value="CBG">Cambridge</option>
+                <option value="CMB">Cambridge North</option>
+                <option value="CNY">Cantley</option>
+                <option value="CWC">Chappel & Wakes Colne</option>
+                <option value="CHM">Chelmsford</option>
+                <option value="CHN">Cheshunt</option>
+                <option value="CLT">Clacton-on-Sea</option>
+                <option value="COL">Colchester</option>
+                <option value="CET">Colchester Town</option>
+                <option value="CES">Cressing (Essex)</option>
+                <option value="CMR">Cromer</option>
+                <option value="DSM">Darsham</option>
+                <option value="DBR">Derby Road (Ipswich)</option>
+                <option value="DIS">Diss</option>
+                <option value="DVC">Dovercourt</option>
+                <option value="DOW">Downham Market</option>
+                <option value="ECS">Eccles Road</option>
+                <option value="ESW">Elmswell</option>
+                <option value="ESM">Elsenham (Essex)</option>
+                <option value="ELY">Ely</option>
+                <option value="ENL">Enfield Lock</option>
+                <option value="FLX">Felixstowe</option>
+                <option value="FRI">Frinton-on-Sea</option>
+                <option value="GRB">Great Bentley</option>
+                <option value="GRC">Great Chesterford</option>
+                <option value="GYM">Great Yarmouth</option>
+                <option value="GNT">Gunton</option>
+                <option value="HAD">Haddiscoe</option>
+                <option value="HAS">Halesworth</option>
+                <option value="HRD">Harling Road</option>
+                <option value="HWM">Harlow Mill</option>
+                <option value="HWN">Harlow Town</option>
+                <option value="HPQ">Harwich International</option>
+                <option value="HWC">Harwich Town</option>
+                <option value="HAP">Hatfield Peverel</option>
+                <option value="HFE">Hertford East</option>
+                <option value="HOC">Hockley</option>
+                <option value="HXM">Hoveton & Wroxham</option>
+                <option value="HYH">Hythe (Essex)</option>
+                <option value="INT">Ingatestone</option>
+                <option value="IPS">Ipswich</option>
+                <option value="KEL">Kelvedon</option>
+                <option value="KNE">Kennett</option>
+                <option value="KLN">Kings Lynn</option>
+                <option value="KBX">Kirby Cross</option>
+                <option value="LAK">Lakenheath</option>
+                <option value="LEB">Lea Bridge</option>
+                <option value="LGD">Lingwood</option>
+                <option value="LTP">Littleport</option>
+                <option value="LST">London Liverpool Street</option>
+                <option value="LWT">Lowestoft</option>
+                <option value="MNE">Manea</option>
+                <option value="MNG">Manningtree</option>
+                <option value="MCH">March</option>
+                <option value="MKT">Marks Tey</option>
+                <option value="MES">Melton (Suffolk)</option>
+                <option value="MIS">Mistley</option>
+                <option value="NMT">Needham Market</option>
+                <option value="NMK">Newmarket</option>
+                <option value="NWE">Newport (Essex)</option>
+                <option value="NFA">North Fambridge</option>
+                <option value="NWA">North Walsham</option>
+                <option value="NUM">Northumberland Park</option>
+                <option value="NRW">Norwich</option>
+                <option value="OUN">Oulton Broad North</option>
+                <option value="OUS">Oulton Broad South</option>
+                <option value="PBO">Peterborough</option>
+                <option value="PON">Ponders End</option>
+                <option value="PRL">Prittlewell</option>
+                <option value="RLG">Rayleigh</option>
+                <option value="REE">Reedham (Norfolk)</option>
+                <option value="RFD">Rochford</option>
+                <option value="RNR">Roughton Road</option>
+                <option value="RYN">Roydon</option>
+                <option value="RYH">Rye House</option>
+                <option value="SAH">Salhouse</option>
+                <option value="SAW">Sawbridgeworth</option>
+                <option value="SAX">Saxmundham</option>
+                <option value="SED">Shelford (Cambs)</option>
+                <option value="SNF">Shenfield</option>
+                <option value="SHM">Sheringham</option>
+                <option value="SPP">Shippea Hill</option>
+                <option value="SYT">Somerleyton</option>
+                <option value="SOF">South Woodham Ferrers</option>
+                <option value="SIA">Southend Airport</option>
+                <option value="SOV">Southend Victoria</option>
+                <option value="SMN">Southminster</option>
+                <option value="SPN">Spooner Row</option>
+                <option value="SMT">St Margarets (Herts)</option>
+                <option value="SSD">Stansted Airport</option>
+                <option value="SST">Stansted Mountfitchet</option>
+                <option value="SMK">Stowmarket</option>
+                <option value="SRA">Stratford (London)</option>
+                <option value="SUY">Sudbury (Suffolk)</option>
+                <option value="TTF">Thetford</option>
+                <option value="TLS">Thorpe-le-Soken</option>
+                <option value="TRS">Thurston</option>
+                <option value="TOM">Tottenham Hale</option>
+                <option value="TRM">Trimley</option>
+                <option value="WLC">Waltham Cross</option>
+                <option value="WON">Walton-on-the-Naze</option>
+                <option value="WAR">Ware (Herts)</option>
+                <option value="WBC">Waterbeach</option>
+                <option value="WTG">Watlington</option>
+                <option value="WEE">Weeley</option>
+                <option value="WRN">West Runton</option>
+                <option value="WFI">Westerfield</option>
+                <option value="WNT">White Notley</option>
+                <option value="WLE">Whittlesea</option>
+                <option value="WLF">Whittlesford Parkway</option>
+                <option value="WIC">Wickford</option>
+                <option value="WCM">Wickham Market</option>
+                <option value="WTM">Witham</option>
+                <option value="WIV">Wivenhoe</option>
+                <option value="WDB">Woodbridge</option>
+                <option value="WRT">Worstead</option>
+                <option value="WRB">Wrabness</option>
+                <option value="WMD">Wymondham</option>
+            </select>
+        </div>    
+        <input type="submit" name="submit" id="submit">
+    </form>
+    <hr>
+
+    <h2>Struggling to submit online?</h2>
+    <a href="contact.html#otherWays">Find out other methods of reporting the app</a>
+
+    <br><hr>
+
+    <!-- Footer -->
+    <div id="footer">
+        <a href="https://www.greateranglia.co.uk/travel-information/journey-planning/network-map" title="Go to network map in main website">Network map</a>
+        <a href="https://www.greateranglia.co.uk/travel-information/live-departure-arrival-boards" title="Go to live departures in main website">Live departures</a>
+        <a href="https://www.greateranglia.co.uk/travel-information/timetables">Timetables</a>
+    </div>
+</body>
+</html>

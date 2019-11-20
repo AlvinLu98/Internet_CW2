@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Engineer's Hub</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/engineer.css">
+	<script src="javascript/engineer.js"></script>
+</head>
+<!-- Whenever this page loads, check if there's a user logged in -->
+<body onload="checkLogin()">
+  <div class="logo">
+    <!-- Logo links to the home page -->
+        <a href="home.html"><img src="GALogo.jpg" alt="Greater Anglia Logo" id="logo"></a>
+    </div>
+
+    <!-- Log in button -->
+    <button onclick="location.href='login.html'" id="Login" style="display: none" class="button">Login</button>
+
+    <!-- Log out button -->
+    <button onclick="logout()" id="logout" style="display: none" class="button">Logout</button>
+
+    <!-- Shows the user id if there's a user logged in -->
+    <p id="LoginID"></p>
+
+    <!-- Menu bar items -->
+    <div id="menuToggle" >
+        <input type="checkbox" id="menuSmall"/>
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="contact.html">Contact & Support</a></li>
+          <li><a href="Generic_form.html">Report fault</a></li>
+          <li id="engineer"><a href="engineer.html" class="active">Engineer</a></li>
+      </ul>
+    </div> 
+
+    <!-- Table to show the list of faults submitted -->
+	<table id=fault>
+		<tr>
+			<th id=no>ID</th>
+			<th>Fault type</th>
+			<th>Coach number</th> 
+			<th>Train class</th> 
+			<th>Notes</th> 
+			<th>Status</th>
+		</tr>
+	</table>
+
+	<form id="filterFault" onsubmit="return filterFault()">
+		<h2>Sort the fault</h2>
+		<div id="filter_type"> Filter type
+			<select name="Filter fault" id="filterType" class="formItem" required>
+				<option disabled selected value> -- select an option -- </option>
+				<option value="fault">Fault type</option>
+				<option value="coach">Coach number</option>
+				<option value="train">Train class</option>
+			</select>
+		</div>  
+
+		<div id="filterValue"> Filter value <input type="text" name="value" value="" placeholder="Value" id="filterVal" required> </div>
+		<input type="submit" name="sortFaults">
+		<button id="clearFilter" onclick="window.location.reload()">Remove filter</button>
+	</form>
+
+	<!-- Form to mark a fault as completed -->
+	<form id="completeFault" onsubmit= "return removeFault()">
+		<h2>Remove fault</h2>
+		<div id="empid"> Engineer ID <input type="text" name="empID" id="empID" required> </div>
+		<div id="id"> Fault ID <input type="text" name="ID" id="ID" required> </div>
+		<div id="note"> Notes <input type="text" name="notes" id="notes"></div>
+
+		<input type="submit" name="submit" id="submit">
+		<button id="clear" name="clearFaults" onclick="return clearFaults()"> Empty all faults</button>
+	</form>
+
+
+	<!-- Footer -->
+	<div id=footer>
+		<a href="https://www.greateranglia.co.uk/travel-information/journey-planning/network-map" title="Go to network map in main website">Network map</a>
+		<a href="https://www.greateranglia.co.uk/travel-information/live-departure-arrival-boards" title="Go to live departures in main website">Live departures</a>
+		<a href="https://www.greateranglia.co.uk/travel-information/timetables">Timetables</a>
+	</div>
+</body>
+</html>

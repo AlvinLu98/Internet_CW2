@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Help and Contacts</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <script src="javascript/default.js"></script>
+</head>
+
+<!-- Whenever this page loads, check if there's a user logged in -->
+<body onload="checkLogin()">
+  <div class="logo">
+    <!-- Logo links to the home page -->
+    <a href="home.html"><img src="GALogo.jpg" alt="Greater Anglia Logo" id="logo"></a>
+  </div>
+
+  <!-- Log in button -->
+  <button onclick="location.href='login.html'" id="Login" style="display: none">Login</button>
+
+  <!-- Log out button -->
+  <button onclick="logout()" id="logout" style="display: none">Logout</button>
+  <p id="LoginID"></p>
+
+  <!-- Menu bar items -->
+  <div id="menuToggle">
+    <input type="checkbox" id="menuSmall"/>
+    <span></span>
+    <span></span>
+    <span></span>
+    <ul id="menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="contact.html" class="active">Contact & Support</a></li>
+      <li><a href="Generic_form.html">Report fault</a></li>
+      <li style="display: none;" id="engineer"><a href="engineer.html">Engineer</a></li>
+    </ul>
+  </div>
+
+
+  <div id="info">
+    <!-- Information about how to submit a form -->
+    <h2>Fault report help</h2>
+    <p>Reporting fault in this app is simple, Enter the report fault page through the menu bar or from the home page. </p>
+
+    <p>Follow the questions in the form, extra question might appear due to the selections you have chosen. <b>ALL</b> fields shown in the form are required unless stated otherwise. <b>Optionally</b>, you can submit your email to get updates on the progress. <b>If you have already logged into an account</b>, the update will be sent to the account that's logged in.</p>
+
+    <!-- Button to go to the fault reporting page -->
+    <button id="goToFault" onclick="location.href='Generic_form.html'">Go to fault form</button>
+    <hr>
+
+    <!-- In the case that reporting online is not suitable, below is a list of other ways to report -->
+    <h2 id="otherWays">Other ways to report fault</h2>
+    <p>If submitting fault through the form is not an option, there are several ways to report fault.</p>
+    <ul>
+      <li>Report to the staff verbally at the train</li>
+      <li>Contact us by email at <a href="contactcentre@greateranglia.co.uk"> contactcentre@greateranglia.co.uk</a> </li>
+      <li>Send us a photograph of the fault on <a href="https://twitter.com/greateranglia">Twitter</a> </li>
+    </ul>
+    <hr>
+
+    <!-- Useful contacts -->
+    <h2>Useful Contacts</h2>
+    <p>If you're having problems with the booking engine (<a href="https://www.buytickets.greateranglia.co.uk">https://www.buytickets.greateranglia.co.uk</a>), please contact our web support team by phone using the number below.</p>
+
+    <p>Issues regarding www.greateranglia.co.uk should be directed via email to our Customer Relations team at <a href='contactcentre@greateranglia.co.uk'>contactcentre@greateranglia.co.uk</a></p>
+
+    <h3>Greater Anglia Web Support Team</h3>
+    <p>Tel: 0345 600 7245 (option 6)</p>
+    <p>Open Monday to Sunday 08:00 - 22:00 an answer phone is available outside these times.</p>
+
+    <a href="https://careers.greateranglia.co.uk/departments-and-locations" title="Go to the main site to see all our departments around the UK"><h3>Our departments</h3></a>
+    <br><br>
+  </div>
+  <div id="footer">
+    <a href="https://www.greateranglia.co.uk/travel-information/journey-planning/network-map" title="Go to network map in main website">Network map</a>
+    <a href="https://www.greateranglia.co.uk/travel-information/live-departure-arrival-boards" title="Go to live departures in main website">Live departures</a>
+    <a href="https://www.greateranglia.co.uk/travel-information/timetables">Timetables</a>
+  </div>
+</body>
+</html>
