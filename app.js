@@ -4,8 +4,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {Client} = require('pg'); // DB client settings
-const connectionString = 'postgresql://student:dbpassword@localhost/studentdb';
+var connect = require("connect");
+
+var app = connect.createServer().use(connect.static('U:\Documents\GitHub\Internet_CW2' + '/public'));
+
+app.listen(8104);
 
 // we will learn this later -- it starts a simple web server
 app.use(express.static('public'));
@@ -44,19 +47,12 @@ app.get('/show_all', async function (req, res) {
     res.send(json);
 })
 
-app.listen(8000, function () {
-  console.log('Routed app listening on port 8000!');
+app.listen(8104, function () {
+  console.log('Routed app listening on port 8104!');
 });
 
 async function logger(obj) {
-    // obj is the currently recieved form data
-    
-    // TODO (0.5) create a Client object
-    // TODO (0.5) create a database connection using the connecion string
-    // TODO (0.5) construct a DB record insertion string using the attributes of obj
-    // TODO (0.5) execute the data insertion command (do not forget await)
-    // TODO (0.5) close the DB conneciton
-
+ 
     const client = new Client({
       connectionString: connectionString,
     });
@@ -74,12 +70,7 @@ async function logger(obj) {
 }
 
 async function show_all() {
-    // TODO (0.5) create a Client object
-    // TODO (0.5) create a database connection using the connecion string
-    // TODO (0.5) construct a DB query string for all records
-    // TODO (0.5) execute the query command (do not forget await)
-    // TODO (0.5) close the DB conneciton
-    // TODO (0.5) convert the query results to a json string and return it   
+
    const client = new Client({
       connectionString: connectionString,
     });
