@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
 <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="styles/about.css">
+<link rel="stylesheet" type="text/css" href="styles/housekeeping.css">
 <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
 	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
 <!-- the lines above specify all the HTML definitions you'll need for validation -->
@@ -88,6 +88,12 @@
 			</nav>
 			</div>
 			<!-- Home -->
+			<div class="col-lg-6">
+					<div class="intro_image">
+						<div class="background_image" style="background-image:url(images/intro.jpg)"></div>
+						<img src="images/intro.jpg" alt="">
+					</div>
+				</div>
 
 	<div class="home">
 		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/housekeeping.jpg" data-speed="0.8"></div>
@@ -95,6 +101,9 @@
 			<div class="home_title"><h1>Housekeeping</h1></div>
 		</div>
 	</div>
+	</div>
+	<div class="roomCheck">
+	<div class="room_container">
 	 <button onclick="viewCheckedOutRooms()">View Checked Out Rooms</button>
     <table>
      <thead>
@@ -109,6 +118,10 @@
      </tbody>
     </table>
 	  </br>
+	</div>
+	</div>
+	
+	<div class="roomUpdate">
 	<form name="HousekeepingForm">
 		EmployeeID <select size="1" id="employeeid">
 		  <option value="Default"></option>
@@ -122,38 +135,38 @@
 		  </br>
 		Room Number	<select size="1" id="roomNumber">
 		  <option value="Default"></option>
-		  <option value="01">01</option>
-		  <option value="02">02</option>
-		  <option value="03">03</option>
-		  <option value="04">04</option>
-		  <option value="05">05</option>
-		  <option value="06">06</option>
-		  <option value="07">07</option>
-		  <option value="08">08</option>
-		  <option value="09">09</option>
-		  <option value="10">10</option>
-		  <option value="11">11</option>
-		  <option value="12">12</option>
-		  <option value="13">13</option>
-		  <option value="14">14</option>
-		  <option value="15">15</option>
-		  <option value="16">16</option>
-		  <option value="17">17</option>
-		  <option value="18">18</option>
-		  <option value="19">19</option>
-		  <option value="20">20</option>
-		  <option value="21">21</option>
-		  <option value="22">22</option>
-		  <option value="23">23</option>
-		  <option value="24">24</option>
-		  <option value="25">25</option>
-		  <option value="26">26</option>
-		  <option value="27">27</option>		
-		  <option value="28">28</option>
-		  <option value="29">29</option>	
-		  <option value="30">30</option>		
-		  <option value="31">31</option>
-		  <option value="32">32</option>	
+		  <option value="101">101</option>
+		  <option value="102">102</option>
+		  <option value="103">103</option>
+		  <option value="104">104</option>
+		  <option value="105">105</option>
+		  <option value="106">106</option>
+		  <option value="107">107</option>
+		  <option value="108">108</option>
+		  <option value="201">201</option>
+		  <option value="202">202</option>
+		  <option value="203">203</option>
+		  <option value="204">204</option>
+		  <option value="205">205</option>
+		  <option value="206">206</option>
+		  <option value="207">207</option>
+		  <option value="208">208</option>
+		  <option value="209">209</option>
+		  <option value="210">210</option>
+		  <option value="211">211</option>
+		  <option value="212">212</option>
+		  <option value="301">301</option>
+		  <option value="302">302</option>
+		  <option value="303">303</option>
+		  <option value="304">304</option>
+		  <option value="305">305</option>
+		  <option value="306">306</option>
+		  <option value="307">307</option>		
+		  <option value="308">308</option>
+		  <option value="309">309</option>	
+		  <option value="310">310</option>		
+		  <option value="311">311</option>
+		  <option value="312">312</option>	
 		  </select>		
 		  </br>		  
 		New Status <select size="1" id="newStatus">
@@ -166,6 +179,7 @@
 		<input type="reset" value="Reset" id="reset_button">
 		<input type="button" value="Update" id="submit_button" onclick="updateRoomStatus()">
 	</form>
+	</div>
 
    
 </body>
