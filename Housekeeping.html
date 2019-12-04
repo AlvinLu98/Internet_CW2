@@ -1,0 +1,185 @@
+<html lang="en">
+<head>
+<title>Housekeeping</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Marimar Hotel template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
+<link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/housekeeping.css">
+<link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
+	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+<!-- the lines above specify all the HTML definitions you'll need for validation -->
+	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="housekeepingForm.js"></script>
+</head>
+<body>
+<header>
+<header class="header">
+		<div class="header_content d-flex flex-column align-items-center justify-content-lg-end justify-content-center">
+			
+			<!-- Logo -->
+			<div class="logo"><a href="#"><img class="logo_1" src="images/logo.png" alt=""><img class="logo_2" src="images/logo_2.png" alt=""><img class="logo_3" src="images/logo_3.png" alt=""></a></div>
+
+			<!-- Main Nav -->
+			<nav class="main_nav">
+				<ul class="d-flex flex-row align-items-center justify-content-start">
+					<li><a href="index.html">Home</a></li>
+			</nav>
+			</div>
+		<div class="header_right d-flex flex-row align-items-center justify-content-start">
+				
+				<!-- Search Activation Button -->
+				<div class="search_button">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 512 512" enable-background="new 0 0 512 512" width="512px" height="512px">
+						<g>
+							<path d="M495,466.2L377.2,348.4c29.2-35.6,46.8-81.2,46.8-130.9C424,103.5,331.5,11,217.5,11C103.4,11,11,103.5,11,217.5   S103.4,424,217.5,424c49.7,0,95.2-17.5,130.8-46.7L466.1,495c8,8,20.9,8,28.9,0C503,487.1,503,474.1,495,466.2z M217.5,382.9   C126.2,382.9,52,308.7,52,217.5S126.2,52,217.5,52C308.7,52,383,126.3,383,217.5S308.7,382.9,217.5,382.9z" fill="#FFFFFF"></path>
+						</g>
+					</svg>
+				</div>
+				<!-- Hamburger Button -->
+				<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+			</div>
+			<!-- Search Panel -->
+			<div class="search_panel">
+				<div class="search_panel_content d-flex flex-row align-items-center justify-content-start">
+					<img src="images/search.png" alt="">
+					<form action="#" class="search_form">
+						<input type="text" class="search_input" placeholder="Type your search here" required="required">
+					</form>
+					<div class="search_close ml-auto d-flex flex-column align-items-center justify-content-center"><div></div></div>
+				</div>
+			</div>
+		</div>
+
+</header>
+<div class="logo_overlay">
+		<div class="logo_overlay_content d-flex flex-column align-items-center justify-content-center">
+			<div class="logo"><a href="#"><img src="images/logo_3.png" alt=""></a></div>
+		</div>
+	</div>
+
+	<!-- Menu Overlay -->
+
+	<div class="menu_overlay">
+		<div class="menu_overlay_content d-flex flex-row align-items-center justify-content-center">
+			
+			<!-- Hamburger Button -->
+			<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+
+		</div>
+	</div>
+
+	<!-- Menu -->
+
+	<div class="menu">
+		<div class="menu_container d-flex flex-column align-items-center justify-content-center">
+
+			<!-- Menu Navigation -->
+			<nav class="menu_nav text-center">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+				</ul>
+			</nav>
+			</div>
+			<!-- Home -->
+			<div class="col-lg-6">
+					<div class="intro_image">
+						<div class="background_image" style="background-image:url(images/intro.jpg)"></div>
+						<img src="images/intro.jpg" alt="">
+					</div>
+				</div>
+
+	<div class="home">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/housekeeping.jpg" data-speed="0.8"></div>
+		<div class="home_container d-flex flex-column align-items-center justify-content-center">
+			<div class="home_title"><h1>Housekeeping</h1></div>
+		</div>
+	</div>
+	</div>
+	<div class="roomCheck">
+	<div class="room_container">
+	 <button onclick="viewCheckedOutRooms()">View Checked Out Rooms</button>
+    <table>
+     <thead>
+          <tr>
+               <th>Number | </th>
+               <th>Type | </th>
+               <th>Status | </th>
+               <th>Last Updated By</th>
+           </tr>
+     </thead>
+     <tbody id="info">
+     </tbody>
+    </table>
+	  </br>
+	</div>
+	</div>
+	
+	<div class="roomUpdate">
+	<form name="HousekeepingForm">
+		EmployeeID <select size="1" id="employeeid">
+		  <option value="Default"></option>
+		  <option value="01">01</option>
+		  <option value="02">02</option>
+		  <option value="03">03</option>
+		  <option value="04">04</option>
+		  <option value="05">05</option>
+		  <option value="06">06</option>
+		  </select>
+		  </br>
+		Room Number	<select size="1" id="roomNumber">
+		  <option value="Default"></option>
+		  <option value="101">101</option>
+		  <option value="102">102</option>
+		  <option value="103">103</option>
+		  <option value="104">104</option>
+		  <option value="105">105</option>
+		  <option value="106">106</option>
+		  <option value="107">107</option>
+		  <option value="108">108</option>
+		  <option value="201">201</option>
+		  <option value="202">202</option>
+		  <option value="203">203</option>
+		  <option value="204">204</option>
+		  <option value="205">205</option>
+		  <option value="206">206</option>
+		  <option value="207">207</option>
+		  <option value="208">208</option>
+		  <option value="209">209</option>
+		  <option value="210">210</option>
+		  <option value="211">211</option>
+		  <option value="212">212</option>
+		  <option value="301">301</option>
+		  <option value="302">302</option>
+		  <option value="303">303</option>
+		  <option value="304">304</option>
+		  <option value="305">305</option>
+		  <option value="306">306</option>
+		  <option value="307">307</option>		
+		  <option value="308">308</option>
+		  <option value="309">309</option>	
+		  <option value="310">310</option>		
+		  <option value="311">311</option>
+		  <option value="312">312</option>	
+		  </select>		
+		  </br>		  
+		New Status <select size="1" id="newStatus">
+		<option value="Default"></option>
+		<option value="Checked Out">C</option>
+		<option value="Avaliable">A</option>
+		<option value="Unavailable">X</option>
+		</select>
+		  </br>
+		<input type="reset" value="Reset" id="reset_button">
+		<input type="button" value="Update" id="submit_button" onclick="updateRoomStatus()">
+	</form>
+	</div>
+
+   
+</body>
