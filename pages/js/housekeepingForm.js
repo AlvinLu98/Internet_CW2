@@ -22,7 +22,7 @@ function onTextReady(text) {
 
     console.log(text);
 
-    var json = JSON.parse(text); // we will learn this later
+    var json = JSON.parse(text); 
 
     $('#ret').html( json.course + ", " + json.studentName + ", " + json.school + ", " + json.adviser); 
 }
@@ -49,7 +49,7 @@ function send_post(path, data) {
 
 function onStreamProcessed(text) {
   console.log(text);
-  var obj = JSON.parse(text); // we will learn this later
+  var obj = JSON.parse(text);
 
   console.log(obj);
   $('#info').empty()
