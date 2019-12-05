@@ -12,13 +12,24 @@ const Logger = require('./Reference/logger');
 // logger.log('Hello world');
 
 const express = require('express');
+const router = express.Router();
 const app = express();
 
+// app.use(express.static('public'));
+// app.listen(8000, function() {
+//     console.log('Routed ap listening to port 8000!');
+// })
+
+// app.get('/', function(req, res) {
+//     res.send('index')
+// })
+
+//----------------------------------- Database stuff -----------------------------------
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 const { Client } = require('pg');
-const connectionString = 'postgres://postgres:lulu1998@localhost:5432/Internet'
+const connectionString = 'postgresql://groupbe:groupbe@cmp-19teach2.uea.ac.uk/groupbe'
 
 const client = new Client({ connectionString: connectionString });
 client.query('SET search_path to hotelbooking');
@@ -272,6 +283,8 @@ async function changeStatus(status, roomNo) {
     console.log(json);
 }
 
+
+//----------------------------------- Testing -----------------------------------
 // showAllBooking();
 // showAllRates();
 // getRate('std_t');
