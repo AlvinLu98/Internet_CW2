@@ -42,6 +42,14 @@ app.post('/changeStatus', jsonParser, async(req, res) => {
     res.sendFile('/public/index.html', { root: __dirname });
 })
 
+app.post('/getAvailableRooms', jsonParser, async(req, res) => {
+    const data = req.body;
+    console.log(data.checkIn + " " + data.checkOut + " " + data.type);
+    getAvailableRooms(data.checkIn, data.checkOut, data.type).then(rooms => {
+        res.send(rooms);
+    })
+})
+
 //----------------------------------- Database setup -----------------------------------
 
 async function setUpDatabase() {
