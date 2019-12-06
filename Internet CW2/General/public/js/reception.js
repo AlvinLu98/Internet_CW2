@@ -108,17 +108,21 @@ function getAllRooms() {
 function goToBookingForm () {
     location.href = "bookingform.html"
 }
-function changeStatus() {
-    var data = [];
-    var r_no, r_status;
-    //https://www.fourfront.us/blog/store-html-table-data-to-javascript-array#step1
-    $('#info tr').each((row, tr) => {
-        r_no = $(tr).find('td:eq(0)').text();
-        r_status = $(tr).find('td:eq(2)').find('select').val();
-        var room = new Object();
-        room.r_no = r_no;
-        room.r_status = r_status;
-        data[row] = room;
-    });
-    send_post("changeStatus", data);
+function getbookingName() {
+    fetch('getBookingByName').then(onSuccess, onError).then(onStreamProcessed);
+}
+function getbookingRef() {
+    fetch('getBookingByRef').then(onSuccess, onError).then(onStreamProcessed);
+}
+function checkIn() {
+    fetch('checkIn').then(onSuccess, onError).then(onStreamProcessed);
+}
+function checkOutRef() {
+    fetch('checkOut').then(onSuccess, onError).then(onStreamProcessed);
+}
+function checkOutRoom() {
+    fetch('checkOutByRoom').then(onSuccess, onError).then(onStreamProcessed);
+}
+function viewPayments() {
+    fetch('getPaymentType').then(onSuccess, onError).then(onStreamProcessed);
 }
