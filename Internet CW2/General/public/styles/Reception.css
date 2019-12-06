@@ -11,8 +11,10 @@
 4. Menu
 5. Home
 6. Booking
-7. Rooms
-8. Footer
+7. Intro
+8. Offering
+9. Discover
+10. Footer
 
 
 ******************************/
@@ -722,376 +724,41 @@ section
 }
 
 /*********************************
-6. Booking
+6. Intro
 *********************************/
 
-.booking
+.intro
 {
 	background: #ffffff;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
-.booking_container
+.intro_container
 {
-	height: 110px;
+	background: #ff0000;
 	width: 100%;
-	background: #ffffff;
-	margin-top: -66px;
-	padding-left: 40px;
-	padding-right: 42px;
+	height: 50%;
+	margin-top: 150px;
 }
-.booking_form
+.intro_text
 {
-	width: 100%;
+	margin-top: 49px;
 }
-.booking_form_inputs
+.intro_button
 {
-	width: calc(100% - 289px);
-	height: 65px;
+	margin-top: 44px;
 }
-.booking_form_inputs > div
+.intro_image
 {
-	width: calc((100% - 27px) / 4);
+	height: 100%;
 }
-.booking_form_inputs > div > input
-{
-	width: 100%;
-	height: 65px;
-	padding-left: 24px;
-	cursor: pointer;
-	border: none;
-	outline: none;
-	background: #f4f5fa;
-	font-size: 16px;
-	font-weight: 500;
-	color: #4a4f59;
-}
-.booking_input::-webkit-input-placeholder
-{
-	font-size: 14px !important;
-	font-weight: 400 !important;
-	color: #4a4f59 !important;
-}
-.booking_input:-moz-placeholder
-{
-	font-size: 14px !important;
-	font-weight: 400 !important;
-	color: #4a4f59 !important;
-}
-.booking_input::-moz-placeholder
-{
-	font-size: 14px !important;
-	font-weight: 400 !important;
-	color: #4a4f59 !important;
-} 
-.booking_input:-ms-input-placeholder
-{ 
-	font-size: 14px !important;
-	font-weight: 400 !important;
-	color: #4a4f59 !important;
-}
-.booking_input::input-placeholder
-{
-	font-size: 14px !important;
-	font-weight: 400 !important;
-	color: #4a4f59 !important;
-}
-.booking_dropdown::after
-{
-	display: block;
-	position: absolute;
-	top: 50%;
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	-o-transform: translateY(-50%);
-	transform: translateY(-50%);
-	cursor: pointer;
-	right: 20px;
-	font-family: 'FontAwesome';
-	content: '\f107';
-}
-.booking_form_button
-{
-	width: 280px;
-	height: 65px;
-	background: #ff9000;
-	margin-left: 9px;
-	border: none;
-	outline: none;
-	font-size: 14px;
-	font-weight: 700;
-	color: #ffffff;
-	text-transform: uppercase;
-	letter-spacing: 0.075em;
-	cursor: pointer;
-}
-.custom-select
-{
-	position: relative;
-	height: 65px;
-	padding: 0px;
-	background: none;
-	border: none;
-	border-radius: 0px;
-}
-.custom-select select
+.intro_image > img
 {
 	display: none;
 }
-.select-selected
-{
-	width: 100%;
-	height: 100%;
-	background-color: #f4f5fa;
-	line-height: 65px;
-	font-size: 14px;
-	font-weight: 400;
-	color: #4a4f59 !important;
-}
-.select-selected:after
-{
-	display: block;
-	position: absolute;
-	top: 50%;
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	-o-transform: translateY(-50%);
-	transform: translateY(-50%);
-	cursor: pointer;
-	right: 20px;
-	font-family: 'FontAwesome';
-	content: '\f107';
-}
-.select-selected.select-arrow-active:after
-{
-	
-}
-.select-items div,.select-selected
-{
-	padding: 0px;
-	padding-left: 24px;
-	cursor: pointer;
-}
-.select-items
-{
-	position: absolute;
-	top: 100%;
-	left: 0;
-	right: 0;
-	z-index: 99;
-	padding-top: 7px;
-	padding-bottom: 7px;
-	background: #f4f5fa;
-}
-.select-items div
-{
-	padding-top: 10px;
-	padding-bottom: 10px;
-	font-size: 14px;
-	font-weight: 400;
-	color: #4a4f59 !important;
-}
-.select-items div:not(:last-of-type)
-{
-	border-bottom: solid 1px rgba(255,255,255,1);
-}
-.select-hide
-{
-	display: none;
-}
-.select-items div:hover, .same-as-selected
-{
-	background-color: rgba(0, 0, 0, 0.1);
-}
 
 /*********************************
-7. Rooms
-*********************************/
-
-.rooms
-{
-	background: #ffffff;
-	padding-top: 100px;
-	padding-bottom: 110px;
-}
-.card-columns
-{
-	-webkit-column-count: 2;
-	column-count: 2;
-	-webkit-column-gap: 30px;
-	column-gap: 30px;
-}
-.card-columns .card
-{
-	margin-bottom: 35px;
-}
-.card
-{
-	border: none;
-	border-radius: 0px;
-}
-.card-img-top
-{
-	border-radius: 0px;
-}
-.card-body
-{
-	background: #f4f5fa;
-	padding-left: 80px;
-	padding-top: 71px;
-	padding-right: 50px;
-	padding-bottom: 101px;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.card-special .card-body
-{
-	background: #171126;
-}
-.rooms_title h2
-{
-	color: #150f24;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.card-special .rooms_title h2
-{
-	color: #ffffff;
-}
-.rooms_text
-{
-	margin-top: 30px;
-}
-.rooms_text p
-{
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.card-special .rooms_text p
-{
-	color: #ffffff;
-}
-.rooms_list
-{
-	margin-top: 36px;
-}
-.rooms_list ul li:not(:last-of-type)
-{
-	margin-bottom: 14px;
-}
-.rooms_list ul li img
-{
-	margin-right: 22px;
-}
-.rooms_list ul li span
-{
-	font-size: 15px;
-	font-weight: 400;
-	color: #4a4f59;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.card-special .rooms_list ul li span
-{
-	color: #ffffff;
-}
-.rooms_price
-{
-	margin-top: 33px;
-	font-size: 36px;
-	font-weight: 700;
-	color: #ff9000;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.card-special .rooms_price,
-.card-special .rooms_price span
-{
-	color: #ffffff;
-}
-.rooms_price span
-{
-	font-size: 18px;
-	font-weight: 700;
-	color: #4a4f59;
-	margin-left: 5px;
-}
-.rooms_button
-{
-	margin-top: 41px;
-}
-.card-special-panel
-{
-	position: absolute;
-	top: 27px;
-	right: -78px;
-	width: 181px;
-	height: 71px;
-	text-align: center;
-	font-size: 14px;
-	font-weight: 700;
-	color: #ffffff;
-	text-transform: uppercase;
-	letter-spacing: 0.075em;
-	line-height: 71px;
-	background: #443586;
-}
-.load_more_container
-{
-	margin-top: 75px;
-}
-.load_more_button
-{
-	width: 282px;
-	height: 65px;
-	background: #171126;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-	border: solid 2px #171126;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.load_more_button:hover
-{
-	background: transparent;
-}
-.load_more_button a
-{
-	display: block;
-	height: 100%;
-	line-height: 61px;
-	font-size: 14px;
-	font-weight: 700;
-	color: #ffffff;
-	text-transform: uppercase;
-	letter-spacing: 0.075em;
-}
-.load_more_button:hover a
-{
-	color: #171126;
-}
-
-/*********************************
-8. Footer
+7. Footer
 *********************************/
 
 .footer

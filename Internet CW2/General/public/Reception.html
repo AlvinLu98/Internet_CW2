@@ -11,12 +11,12 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
 <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="styles/about.css">
+<link rel="stylesheet" type="text/css" href="styles/Reception.css">
 <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
 	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
 <!-- the lines above specify all the HTML definitions you'll need for validation -->
 	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="ReceptionForm.js"></script>
+	<script src="reception.js"></script>
 </head>
 <body>
 <header>
@@ -93,13 +93,19 @@
 			<!-- NEED TO HAVE AN INPUT FOR A BOOKING NUMBER TO BE ABLE TO
 			CHECK THEM IN. OR BE ABLE TO ACCESS A TABLE OF ALL ROOMS AND
 			SELECT A CHECKED IN OPTION -->
-
+		</div>
 	<div class="home">
 		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/reception.jpg" data-speed="0.8"></div>
 		<div class="home_container d-flex flex-column align-items-center justify-content-center">
 			<div class="home_title"><h1>Reception</h1></div>
 		</div>
 	</div>
+	<div class="intro">
+            <div class="intro_container">
+                <div class="row row-eq-height">
+                    <!-- Intro Content -->
+                    <div class="col-lg-6">
+						<h1>"Testing for Errors2"</h1>
 	 <button onclick="viewAllRooms()">View All Rooms</button>
     <table>
      <thead>
@@ -115,52 +121,44 @@
     </table>
 	  </br>
 	<form name="ReceptionForm">
-		EmployeeID <select size="1" id="employeeid">
-		  <option value="Default"></option>
-		  <option value="01">01</option>
-		  <option value="02">02</option>
-		  <option value="03">03</option>
-		  <option value="04">04</option>
-		  <option value="05">05</option>
-		  <option value="06">06</option>
-		  </select>
-		  </br>
+
+		<button onclick="goToBookingForm()">Book In Guest</button>
 
 			<!-- 32 options as there is 32 rooms-->
 		Room Number	<select size="1" id="roomNumber">
 		  <option value="Default"></option>
-		  <option value="01">01</option>
-		  <option value="02">02</option>
-		  <option value="03">03</option>
-		  <option value="04">04</option>
-		  <option value="05">05</option>
-		  <option value="06">06</option>
-		  <option value="07">07</option>
-		  <option value="08">08</option>
-		  <option value="09">09</option>
-		  <option value="10">10</option>
-		  <option value="11">11</option>
-		  <option value="12">12</option>
-		  <option value="13">13</option>
-		  <option value="14">14</option>
-		  <option value="15">15</option>
-		  <option value="16">16</option>
-		  <option value="17">17</option>
-		  <option value="18">18</option>
-		  <option value="19">19</option>
-		  <option value="20">20</option>
-		  <option value="21">21</option>
-		  <option value="22">22</option>
-		  <option value="23">23</option>
-		  <option value="24">24</option>
-		  <option value="25">25</option>
-		  <option value="26">26</option>
-		  <option value="27">27</option>
-		  <option value="28">28</option>
-		  <option value="29">29</option>
-		  <option value="30">30</option>
-		  <option value="31">31</option>
-		  <option value="32">32</option>
+		  <option value="01">101</option>
+		  <option value="02">102</option>
+		  <option value="03">103</option>
+		  <option value="04">104</option>
+		  <option value="05">105</option>
+		  <option value="06">106</option>
+		  <option value="07">107</option>
+		  <option value="08">108</option>
+		  <option value="09">201</option>
+		  <option value="10">202</option>
+		  <option value="11">203</option>
+		  <option value="12">204</option>
+		  <option value="13">205</option>
+		  <option value="14">206</option>
+		  <option value="15">207</option>
+		  <option value="16">208</option>
+		  <option value="17">209</option>
+		  <option value="18">210</option>
+		  <option value="19">211</option>
+		  <option value="20">212</option>
+		  <option value="21">301</option>
+		  <option value="22">302</option>
+		  <option value="23">303</option>
+		  <option value="24">304</option>
+		  <option value="25">305</option>
+		  <option value="26">306</option>
+		  <option value="27">307</option>
+		  <option value="28">308</option>
+		  <option value="29">309</option>
+		  <option value="30">310</option>
+		  <option value="31">311</option>
+		  <option value="32">312</option>
 		  </select>
 		  </br>
 		New Status <select size="1" id="newStatus">
@@ -173,6 +171,9 @@
 		<input type="reset" value="Reset" id="reset_button">
 		<input type="button" value="Update" id="submit_button" onclick="updateRoomStatus()">
 	</form>
-
+					</div>
+				</div>
+			</div>
+		</div>
 
 </body>
