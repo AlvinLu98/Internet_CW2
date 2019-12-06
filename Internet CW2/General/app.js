@@ -22,12 +22,14 @@ app.listen(8000, () => {
 })
 
 //--------------------------------- Database functions ---------------------------------
-app.get('/', (req, res) => {
-    res.sendFile('/public/index.html', { root: __dirname })
+app.get('/allRooms', (req, res) => {
+    getAllRooms().then(data => {
+        res.send(data);
+    });
 })
 
 app.get('/checkedOut', (req, res) => {
-    getAllRooms().then(data => {
+    getCheckedOutRooms().then(data => {
         res.send(data);
     });
 })
@@ -37,7 +39,7 @@ app.post('/changeStatus', jsonParser, async(req, res) => {
     for (var i in data) {
         await changeStatus(data[i].r_status, data[i].r_no);
     }
-    res.sendFile('/public/Housekeeping.html', { root: __dirname });
+    res.sendFile('/public/index.html', { root: __dirname });
 })
 
 //----------------------------------- Database setup -----------------------------------
@@ -274,7 +276,7 @@ async function viewPayments(customer_name, checkOut) {
 async function getAllRooms() {
     client = await setUpDatabase();
 
-    query = 'SELECT * FROM room';
+    query = 'SELECT * FROM room ORDER BY r_no';
     const res1 = await client.query(query);
 
     await client.end();
@@ -301,13 +303,21 @@ async function getCheckedOutRooms() {
 }
 
 async function changeStatus(status, roomNo) {
-    client = await setUpDatabase().then(client => {
-        query = 'UPDATE room SET r_status = $1 WHERE r_no = $2';
-        values = [status, roomNo]
-        return client.query(query, values).then(res => {
-            return client.end();
+    client = await setUpDatabase()
+        .then(client => {
+            query = 'UPDATE room SET r_status = $1 WHERE r_no = $2';
+            values = [status, roomNo]
+            return client.query(query, values)
+                .then(res => {
+                    return client.end();
+                })
+                .catch(err => {
+                    console.log(err)
+                });
         })
-    });
+        .catch(err => {
+            console.log(err)
+        });
 }
 
 

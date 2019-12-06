@@ -1,23 +1,3 @@
-function saveForm() {
-
-    // create an empty object
-    var housekeepingData = {}; // showing elements added dynamically
-    housekeepingData.empId = $('#employeeid').val(); //get employee ID
-    housekeepingData.roomNumber = $('#roomNumber').val(); //get room number
-    housekeepingData.newStatus = $('#newStatus').val(); //  get room status
-
-    return housekeepingData
-}
-
-function updateRoomStatus() {
-    var data = saveForm();
-
-    console.log(data);
-
-    send_post('get_form2', data); // submit data via POST
-
-}
-
 function onTextReady(text) {
 
     console.log(text);

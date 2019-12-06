@@ -17,7 +17,7 @@ const dir = __dirname + '/public'
 
 //------------------------------------ Server setup ------------------------------------
 app.use(express.static('./public'));
-app.listen(8000, () => {
+app.listen(8104, () => {
     console.log('Routed app listening to port 8000!');
 })
 
