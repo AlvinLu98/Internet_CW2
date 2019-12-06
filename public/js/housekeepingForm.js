@@ -2,9 +2,9 @@ function saveForm(){
 
     // create an empty object
 	var housekeepingData = {}; 							// showing elements added dynamically
-	housekeepingData.empId = $('#employeeid').val();//get employee ID
-	housekeepingData.roomNumber = $('#roomNumber').val();//get room number
     housekeepingData.newStatus = $('#newStatus').val();//  get room status
+	housekeepingData.roomNumber = $('#roomNumber').val();//get room number
+    
 
     return housekeepingData
 };
@@ -14,7 +14,7 @@ function updateRoomStatus(){
 
     console.log(data);
 
-	send_post('get_form2', data); // submit data via POST
+	changeStatus(data); // submit data via POST
 
 };
 
@@ -24,7 +24,7 @@ function onTextReady(text) {
 
     var json = JSON.parse(text); 
 
-    $('#ret').html( json.course + ", " + json.studentName + ", " + json.school + ", " + json.adviser); 
+    $('#ret').html(json.roomNumber + ", " + json.empId + ", " + json.newStatus); 
 }
 
 function onResponse(response) {
@@ -57,7 +57,6 @@ function onStreamProcessed(text) {
      var eachrow = "<tr>"
                  + "<td>" + item['roomNumber'] + "</td>"
                  + "<td>" + item['newStatus'] + "</td>"
-                 + "<td>" + item['empId'] + "</td>"
                  + "</tr>";
      $('#info').append(eachrow); // use JQuery append method
   });
