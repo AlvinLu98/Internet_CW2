@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
 <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="styles/housekeeping.css">
+<link rel="stylesheet" type="text/css" href="styles/bookingform.css">
 <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
 	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
 <!-- the lines above specify all the HTML definitions you'll need for validation -->
@@ -19,205 +19,206 @@
 	<script src=""></script>
 </head>
 <body>
-<header>
-<header class="header">
-		<div class="header_content d-flex flex-column align-items-center justify-content-lg-end justify-content-center">
+    <header class="header">
+        <div class="header_content d-flex flex-column align-items-center justify-content-lg-end justify-content-center">
 
-			<!-- Logo -->
-			<div class="logo"><a href="#"><img class="logo_1" src="images/logo.png" alt=""><img class="logo_2" src="images/logo_2.png" alt=""><img class="logo_3" src="images/logo_3.png" alt=""></a></div>
+            <!-- Logo -->
+            <div class="logo"><a href="#"><img class="logo_1" src="images/logo.png" alt=""><img class="logo_2" src="images/logo_2.png" alt=""><img class="logo_3" src="images/logo_3.png" alt=""></a></div>
 
-			<!-- Main Nav -->
-			<nav class="main_nav">
-				<ul class="d-flex flex-row align-items-center justify-content-start">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="about.html">About us</a></li>
-                        <li><a href="rooms.html">Rooms</a></li>
-                        <li><a href="blog.html">News</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-			</nav>
-			</div>
-		<div class="header_right d-flex flex-row align-items-center justify-content-start">
-
-				<!-- Search Activation Button -->
-				<div class="search_button">
-					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 512 512" enable-background="new 0 0 512 512" width="512px" height="512px">
-						<g>
-							<path d="M495,466.2L377.2,348.4c29.2-35.6,46.8-81.2,46.8-130.9C424,103.5,331.5,11,217.5,11C103.4,11,11,103.5,11,217.5   S103.4,424,217.5,424c49.7,0,95.2-17.5,130.8-46.7L466.1,495c8,8,20.9,8,28.9,0C503,487.1,503,474.1,495,466.2z M217.5,382.9   C126.2,382.9,52,308.7,52,217.5S126.2,52,217.5,52C308.7,52,383,126.3,383,217.5S308.7,382.9,217.5,382.9z" fill="#FFFFFF"></path>
-						</g>
-					</svg>
-				</div>
-				<!-- Hamburger Button -->
-				<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
-			</div>
-			<!-- Search Panel -->
-			<div class="search_panel">
-				<div class="search_panel_content d-flex flex-row align-items-center justify-content-start">
-					<img src="images/search.png" alt="">
-					<form action="#" class="search_form">
-						<input type="text" class="search_input" placeholder="Type your search here" required="required">
-					</form>
-					<div class="search_close ml-auto d-flex flex-column align-items-center justify-content-center"><div></div></div>
-				</div>
-			</div>
-		</div>
-
-</header>
-<div class="logo_overlay">
-		<div class="logo_overlay_content d-flex flex-column align-items-center justify-content-center">
-			<div class="logo"><a href="#"><img src="images/logo_3.png" alt=""></a></div>
-		</div>
-	</div>
-
-	<!-- Menu Overlay -->
-
-	<div class="menu_overlay">
-		<div class="menu_overlay_content d-flex flex-row align-items-center justify-content-center">
-
-			<!-- Hamburger Button -->
-			<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
-
-		</div>
-	</div>
-
-	<!-- Menu -->
-
-	<div class="menu">
-		<div class="menu_container d-flex flex-column align-items-center justify-content-center">
-
-			<!-- Menu Navigation -->
-			<nav class="menu_nav text-center">
-				<ul>
-					<li><a href="index.html">Home</a></li>
-				</ul>
-			</nav>
-			</div>
-
-			<!-- Home -->
-
-			<!-- NEED TO HAVE AN INPUT FOR A BOOKING NUMBER TO BE ABLE TO
-			CHECK THEM IN. OR BE ABLE TO ACCESS A TABLE OF ALL ROOMS AND
-			SELECT A CHECKED IN OPTION -->
-
-	<div class="home">
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/reception.jpg" data-speed="0.8"></div>
-		<div class="home_container d-flex flex-column align-items-center justify-content-center">
-			<div class="home_title"><h1>Reception</h1></div>
-		</div>
-    </div>
-    
-<form action="">
-    <!--  General -->
-    <div class="form-group">
-      <h2 class="heading">Booking & contact</h2>
-      <div class="controls">
-        <input type="text" id="name" class="floatLabel" name="name">
-        <label for="name">Name</label>
-      </div>
-      <div class="controls">
-        <input type="text" id="email" class="floatLabel" name="email">
-        <label for="email">Email</label>
-      </div>       
-      <div class="controls">
-        <input type="tel" id="phone" class="floatLabel" name="phone">
-        <label for="phone">Phone</label>
-      </div>
-        <div class="grid">
-          <div class="col-2-3">
-            <div class="controls">
-             <input type="text" id="street" class="floatLabel" name="street">
-             <label for="street">Street</label>
-            </div>          
-          </div>
-          <div class="col-1-3">
-            <div class="controls">
-              <input type="number" id="street-number" class="floatLabel" name="street-number">
-              <label for="street-number">Number</label>
-            </div>          
-          </div>
+            <!-- Main Nav -->
+            <nav class="main_nav">
+                <ul class="d-flex flex-row align-items-center justify-content-start">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="about.html">About us</a></li>
+                    <li><a href="rooms.html">Rooms</a></li>
+                    <li><a href="blog.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+            </nav>
         </div>
-        <div class="grid">
-          <div class="col-2-3">
-            <div class="controls">
-              <input type="text" id="city" class="floatLabel" name="city">
-              <label for="city">City</label>
-            </div>         
-          </div>
-          <div class="col-1-3">
-            <div class="controls">
-              <input type="text" id="post-code" class="floatLabel" name="post-code">
-              <label for="post-code">Post Code</label>
-            </div>         
-          </div>
-        </div>
-        <div class="controls">
-          <input type="text" id="country" class="floatLabel" name="country">
-          <label for="country">Country</label>
-        </div>
-    </div>
-    <!--  Details -->
-    <div class="form-group">
-      <h2 class="heading">Details</h2>
-      <div class="grid">
-      <div class="col-1-4 col-1-4-sm">
-        <div class="controls">
-          <input type="date" id="arrive" class="floatLabel" name="arrive" value="<?php echo date('Y-m-d'); ?>">
-          <label for="arrive" class="label-date"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Arrive</label>
-        </div>      
-      </div>
-      <div class="col-1-4 col-1-4-sm">
-        <div class="controls">
-          <input type="date" id="depart" class="floatLabel" name="depart" value="<?php echo date('Y-m-d'); ?>" />
-          <label for="depart" class="label-date"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Depart</label>
-        </div>      
-      </div>
-        </div>
-        <div class="grid">
-      <div class="col-1-3 col-1-3-sm">
-        <div class="controls">
-          <i class="fa fa-sort"></i>
-          <select class="floatLabel">
-            <option value="blank"></option>
-            <option value="1">1</option>
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-          </select>
-          <label for="fruit"><i class="fa fa-male"></i>&nbsp;&nbsp;People</label>
-        </div>      
-      </div>
-      <div class="col-1-3 col-1-3-sm">
-      <div class="controls">
-        <i class="fa fa-sort"></i>
-        <select class="floatLabel">
-          <option value="blank"></option>
-          <option value="deluxe" selected>With Bathroom</option>
-          <option value="Zuri-zimmer">Without Bathroom</option>
-        </select>
-        <label for="fruit">Room</label>
-       </div>     
-      </div>
-  
-      <div class="col-1-3 col-1-3-sm">
-      <div class="controls">
-        <i class="fa fa-sort"></i>
-        <select class="floatLabel">
-          <option value="blank"></option>
-          <option value="single-bed">Zweibett</option>
-          <option value="double-bed" selected>Doppelbett</option>
-        </select>
-        <label for="fruit">Bedding</label>
-       </div>     
-      </div>
-        
-       </div>
-        <div class="grid">
-          <p class="info-text">Please describe your needs e.g. Extra beds, children's cots</p>
-          <br>
-          <div class="controls">
-            <textarea name="comments" class="floatLabel" id="comments"></textarea>
-            <label for="comments">Comments</label>
+        <div class="header_right d-flex flex-row align-items-center justify-content-start">
+
+            <!-- Search Activation Button -->
+            <div class="search_button">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 512 512" enable-background="new 0 0 512 512" width="512px" height="512px">
+                    <g>
+                        <path d="M495,466.2L377.2,348.4c29.2-35.6,46.8-81.2,46.8-130.9C424,103.5,331.5,11,217.5,11C103.4,11,11,103.5,11,217.5   S103.4,424,217.5,424c49.7,0,95.2-17.5,130.8-46.7L466.1,495c8,8,20.9,8,28.9,0C503,487.1,503,474.1,495,466.2z M217.5,382.9   C126.2,382.9,52,308.7,52,217.5S126.2,52,217.5,52C308.7,52,383,126.3,383,217.5S308.7,382.9,217.5,382.9z" fill="#FFFFFF"></path>
+                    </g>
+                </svg>
             </div>
-              <button type="submit" value="Submit" class="col-1-4">Submit</button>
-        </div>  
-    </div> <!-- /.form-group -->
-  </form>
+            <!-- Hamburger Button -->
+            <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+
+            <!-- Search Panel -->
+            <div class="search_panel">
+                <div class="search_panel_content d-flex flex-row align-items-center justify-content-start">
+                    <img src="images/search.png" alt="">
+                    <form action="#" class="search_form">
+                        <input type="text" class="search_input" placeholder="Type your search here" required="required">
+                    </form>
+                    <div class="search_close ml-auto d-flex flex-column align-items-center justify-content-center"><div></div></div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <div class="logo_overlay">
+        <div class="logo_overlay_content d-flex flex-column align-items-center justify-content-center">
+            <div class="logo"><a href="#"><img src="images/logo_3.png" alt=""></a></div>
+        </div>
+    </div>
+
+    <!-- Menu Overlay -->
+
+    <div class="menu_overlay">
+        <div class="menu_overlay_content d-flex flex-row align-items-center justify-content-center">
+
+            <!-- Hamburger Button -->
+            <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+
+        </div>
+    </div>
+
+    <!-- Menu -->
+
+    <div class="menu">
+        <div class="menu_container d-flex flex-column align-items-center justify-content-center">
+
+            <!-- Menu Navigation -->
+            <nav class="menu_nav text-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Home -->
+        <!-- NEED TO HAVE AN INPUT FOR A BOOKING NUMBER TO BE ABLE TO
+        CHECK THEM IN. OR BE ABLE TO ACCESS A TABLE OF ALL ROOMS AND
+        SELECT A CHECKED IN OPTION -->
+
+        <div class="home">
+            <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/reception.jpg" data-speed="0.8"></div>
+            <div class="home_container d-flex flex-column align-items-center justify-content-center">
+                <div class="home_title"><h1>Reception</h1></div>
+            </div>
+        </div>
+    </div>
+    <!--  General -->
+    <div class="mainarea">
+        <h2> Booking & contact</h2>
+        <form id="bookingForm">
+            <div class="left_half">
+                <div class="formblock">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="name" size="25" placeholder="Enter customer name here">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="email" size="25" placeholder="Enter E-mail address here">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="phone">Phone</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="tel" id="phone">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="hono">Address</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="hono" placeholder="House Name or Number">
+                            <input type="text" id="street" placeholder="Street Name">
+                            <input type="text" id="city" placeholder="City">
+                            <input type="text" id="city" placeholder="Country">
+                            <input type="text" id="city" placeholder="Post Code">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="cidate">Check In Date</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="date" id="cidate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="codate">Check Out Date</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="date" id="codate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  Details -->
+            <div class="right_half">
+                <div class="formblock">
+                                       <div class="row">
+                        <div class="col-25">
+                            <label for="roomType">Room Type</label>
+                        </div>
+                        <div class="col-75">
+                            <select size="1" id="roomType">
+                                <option value="00"></option>
+                                <option value="01">Standard Double</option>
+                                <option value="02">Deluxe Double</option>
+                                <option value="03">Standard Twin</option>
+                                <option value="04">Deluxe Twin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="Adults">No. of Guests (Adults | Children)</label>
+                        </div>
+                        <div class="col-75">
+                            <select size="1" id="Adults">
+                                <option value="00"></option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                            </select>
+                            <select size="1" id="Children">
+                                <option value="00"></option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="notes">Notes</label>
+                        </div>
+                        <div class="col-75">
+                            <textarea id="notes" cols="50" rows="10" placeholder="Please include any additional information, requests or comments..."></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                        </div>
+                        <div class="col-75">
+                            <input type="submit" onclick="()" value="Submit Booking" />
+                        </div>
+                    </div>
+                </div>
+        </form>
+
+    </div>
 </body>
