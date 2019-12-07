@@ -108,19 +108,19 @@ function getAllRooms() {
 function goToBookingForm () {
     location.href = "bookingform.html"
 }
-function getbookingName() {
+function getbooking() {
+    if (val.key.localeCompare(item['bref']) == 0) {
     fetch('getBookingByName').then(onSuccess, onError).then(onStreamProcessed);
-}
-function getbookingRef() {
+}else {
     fetch('getBookingByRef').then(onSuccess, onError).then(onStreamProcessed);
 }
 function checkIn() {
     fetch('checkIn').then(onSuccess, onError).then(onStreamProcessed);
 }
-function checkOutRef() {
-    fetch('checkOut').then(onSuccess, onError).then(onStreamProcessed);
-}
-function checkOutRoom() {
+function checkOut() {
+    if (val.key.localeCompare(item['bref']) == 0) {
+        fetch('checkOut').then(onSuccess, onError).then(onStreamProcessed);
+    } else {
     fetch('checkOutByRoom').then(onSuccess, onError).then(onStreamProcessed);
 }
 function viewPayments() {
