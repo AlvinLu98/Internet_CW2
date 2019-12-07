@@ -1,4 +1,4 @@
-﻿<html lang="en">
+<html lang="en">
 <head>
 <title>Reception</title>
 <meta charset="utf-8">
@@ -100,13 +100,10 @@
 			<div class="home_title"><h1>Reception</h1></div>
 		</div>
 	</div>
-	<div class="intro">
-            <div class="intro_container">
-                <div class="row row-eq-height">
-                    <!-- Intro Content -->
-                    <div class="col-lg-6">
-                        <div class="left_half"
-                        <button onclick="getAllRooms()">View All Rooms</button>
+    <div class="formblock">
+        <!-- Intro Content -->
+        <div class="left_half">
+                        <input type="submit" onclick="getAllRooms()" value="View All Rooms"/>
                         <table id="reception">
                             <thead>
                                 <tr>
@@ -119,34 +116,76 @@
                             <tbody id="info"></tbody>
                         </table>
                         </div>
-                        
 
-                        <div class="right_half"
+
+        <div class="right_half">
                             <form id="FindBooking">
-                                booking Reference <input type="text" id="bRef" size="40" placeholder="Enter booking reference here"></br>
-                                Name <input type="text" id="cName" size="25" placeholder="Enter customer name here"></br>
-                                Name <input type="text" id="cRoomNo" size="25" placeholder="Enter room number here"></br>
-                                Check In Date <input type="date" id="cidate"></br>
-                                Check Out Date <input type="date" id="codate"></br>
-                                <button type="submit" onclick="getbookingName()">Find Booking (Name)</button> <br>
-                                <button type="submit" onclick="getbookingRef()">Find Booking (Reference)</button> <br>
-                            </form>
-                        <form id="CheckingInOut">
-                            <button type="button" onclick="checkIn()">Check In</button> <br>
-                            <button type="button" onclick="checkOutRef()">Check Out</button> <br>
-                            <button type="button" onclick="checkOutRoom()">Check Out(#Room)</button> <br>
-                        </form>
-                        </div>
-                        <form id="Payment">
-                            Name <input type="text" id="payment_cName" size="25" placeholder="Enter customer name here"></br>
-                            Check Out Date <input type="date" id="payment_codate"></br>
-                            <button type="button" onclick="getPayment()">View Payment</button> <br>
-                        </form>
-                        </div>
-                    </div>
-                <button onclick="goToBookingForm()">Telephone/In-Person Booking</button>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="bRef">Booking Reference</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" id="bRef" size="40" placeholder="Enter booking reference here">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="cname">Customer Name</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" id="cName" size="25" placeholder="Enter customer name here">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="cRoomNo">Room Number</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" id="cRoomNo" size="25" placeholder="Enter room number here">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="cidate">Check In Date</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="date" id="cidate">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="codate">Check Out Date</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="date" id="codate">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-75">
+                                        <input type="submit" onclick="getbooking()" value="Find Booking"/>
+                                        <input type="submit" onclick="checkIn()" value="Check In"/>
+                                        <input type="submit" onclick="checkOut()"value="Check Out"/>
+                                    </div>
+                                </div>
+</form>
+                          </div>
+
+        <form id="Payment">
+            <div class="row">
+                <div class="col-25">
+                    <label for="payment_cName">Customer Name/Check Out Date</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="payment_cName" size="25" placeholder="Enter customer name here">
+                    <input type="date" id="payment_codate">
+                    <input type="submit" onclick="getPayment()"value="View Payment"/>
+                </div>
             </div>
-			</div>
+        </form>
+
+        <button onclick="goToBookingForm()">Telephone/In-Person Booking</button>
+    </div>
+			
 
 
 </body>
