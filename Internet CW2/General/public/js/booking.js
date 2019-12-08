@@ -22,14 +22,15 @@ function onResponse(response) {
 // submit data for storage using the POST method
 function send_post(path, data) {
     fetch(path, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data), // data can be `string` or {object}!
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        // .then(onResponse)
-        // .then(onTextReady);
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        redirect: 'follow'
+    }).then(res => {
+        alert("Am i here")
+    })
 
 }
 

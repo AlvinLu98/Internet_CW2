@@ -169,7 +169,9 @@
                                 </table>
                             </div>
                             <div id="statusSettings">
-                                <button type="submit" onclick="changeStatus()">Change</button> <br>
+                                <form action="/changestatus" method="POST">
+                                    <button type="submit" onclick="changeStatus()">Change</button> <br>
+                                </form>
                                 <button type="button" onclick="getCheckedOutRooms()">Checked out rooms</button> <br>
                                 <button type="button" onclick="getAllRooms()">All rooms</button> <br>
                             </div>

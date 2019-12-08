@@ -757,6 +757,7 @@ section {
 *********************************/
 
 .intro {
+    width: 100%;
     background: #ffffff;
     padding-top: 142px;
     padding-bottom: 110px;
@@ -778,24 +779,21 @@ section {
     display: none;
 }
 
-#housekeeping {
-    width: 80%;
-    float: left;
+.tableResults {
+    width: 100%;
+    text-align: right;
     border: 1;
 }
 
-#housekeeping td,
+.tableResults .pic {
+    width: 50%;
+}
+
+.tableResults td,
 th {
-    text-align: center;
     padding: 5px;
 }
 
-#statusSettings {
-    float: right;
-}
-
-#statusSettings button {
-    width: 100px;
-    margin-top: 2vh;
-    text-align: center;
+#alternativeRooms {
+    margin-top: 30px;
 }

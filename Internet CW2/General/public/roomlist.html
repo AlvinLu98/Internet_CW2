@@ -1,7 +1,7 @@
 <br lang="en">
 
 <head>
-    <title>Housekeeping</title>
+    <title>Room list</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Marimar Hotel template project">
@@ -12,15 +12,13 @@
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
     <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="styles/housekeeping.css">
+    <link rel="stylesheet" type="text/css" href="styles/roomlist.css">
     <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
     <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
     <!-- the lines above specify all the HTML definitions you'll need for validation -->
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="js/housekeepingForm.js"></script>
 </head>
 
-<body onload="getCheckedOutRooms()">
+<body onload="listRooms()">
     <div class="super_container">
 
         <!-- Header -->
@@ -36,7 +34,8 @@
                 <!-- Main Nav -->
                 <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-center justify-content-start">
-                        <li class="active"><a href="index.html">Housekeeping</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li class="active"><a href="/roomlist">Select your room</a></li>
                     </ul>
                 </nav>
 
@@ -155,16 +154,32 @@
                                 <h1>Available rooms</h1>
                             </div>
                             <div class="roomcheck_container">
-                                <table id="housekeeping">
+                                <table class="tableResults" id="availableRooms">
                                     <thead>
                                         <tr>
-                                            <th>Pictures | </th>
+                                            <th class="pic">Pictures | </th>
+                                            <th>Room | </th>
                                             <th>Type | </th>
                                             <th>Price | </th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
                                     <tbody id="info">
+                                    </tbody>
+                                </table>
+                                <div class="section_title" id="alternativeRooms">
+                                </div>
+                                <table class="tableResults">
+                                    <thead>
+                                        <tr>
+                                            <th class="pic">Pictures | </th>
+                                            <th>Room | </th>
+                                            <th>Type | </th>
+                                            <th>Price | </th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="altInfo">
                                     </tbody>
                                 </table>
                             </div>
@@ -174,4 +189,6 @@
             </div>
         </div>
     </div>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/roomlist.js"></script>
 </body>

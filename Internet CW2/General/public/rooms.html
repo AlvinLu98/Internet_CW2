@@ -159,29 +159,29 @@
                     <div class="row">
                         <div class="col">
                             <div class="booking_container d-flex flex-row align-items-end justify-content-start">
-                                <form onsubmit="getAvailableRooms()" class="booking_form">
+                                <form action="/getAvailableRooms" method="POST" class="booking_form">
                                     <div class="booking_form_container d-flex flex-lg-row flex-column align-items-start justify-content-start flex-wrap">
                                         <div class="booking_form_inputs d-flex flex-row align-items-start justify-content-between flex-wrap">
-                                            <div class="booking_dropdown"><input id="b_checkIn" type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-                                            <div class="booking_dropdown"><input id="b_checkOut" type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
+                                            <div class="booking_dropdown"><input id="b_checkIn" name="b_checkIn" type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
+                                            <div class="booking_dropdown"><input id="b_checkOut" name="b_checkOut" type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
                                             <div class="custom-select" id="">
-                                                <select id="b_rooms">
-                                                        <option value="0">Rooms</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                    </select>
+                                                <select id="b_rooms" name="rooms">
+                                                    <option value="0">Rooms</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
                                             </div>
                                             <div class="custom-select">
-                                                <select id="b_type">
-                                                    <option default>Room Type</option>
-                                                    <option value="std_d">Standard double</option>
-                                                    <option value="std_t">Standard twin</option>
-                                                    <option value="sup_d">Superior double</option>
-                                                    <option value="sup_t">Superior twin</option>
-                                                </select>
+                                                <select id="b_type" name="type">
+                                                        <option default>Room Type</option>
+                                                        <option value="std_d">Standard double</option>
+                                                        <option value="std_t">Standard twin</option>
+                                                        <option value="sup_d">Superior double</option>
+                                                        <option value="sup_t">Superior twin</option>
+                                                    </select>
                                             </div>
                                         </div>
                                         <button type="submit" class="booking_form_button ml-lg-auto">book now</button>

@@ -21,8 +21,9 @@ function send_post(path, data) {
                 'Content-Type': 'application/json'
             }
         })
-        .then(onResponse)
-        .then(onTextReady);
+        .then(res => {
+            res.json()
+        }).then
 
 }
 

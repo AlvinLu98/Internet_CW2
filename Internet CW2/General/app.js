@@ -22,14 +22,19 @@ const dir = __dirname + '/public'
 //------------------------------------ Server setup ------------------------------------
 app.use(express.static(dir));
 
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 app.use(session({
     key: 1,
     secret: "secret",
+    resave: true,
+    saveUninitialized: true,
     cookie: {
         rooms: [],
         checkin: new Date(),
-        checkout: new Date()
+        checkout: new Date(),
+        numrooms: 0,
+        rate: []
     }
 }))
 
@@ -58,9 +63,11 @@ app.get('/contact', (req, res) => {
     res.sendFile(path.join(dir + '/contact.html'));
 })
 
+app.get('/housekeeping', (req, res) => {
+    res.sendFile(path.join(dir + '/housekeeping.html'));
+})
+
 app.get('/roomList', (req, res) => {
-    rooms = req.session.rooms
-    console.log(room)
     res.sendFile(path.join(dir + '/roomlist.html'));
 })
 
@@ -73,24 +80,69 @@ app.get('/allRooms', (req, res) => {
 
 app.get('/checkedOut', (req, res) => {
     getCheckedOutRooms().then(data => {
-        res.send(data);
+        return res.send(data);
     });
 })
 
 app.post('/changeStatus', jsonParser, async(req, res) => {
     const data = req.body;
-    for (var i in data) {
-        await changeStatus(data[i].r_status, data[i].r_no);
+    const loop = async _ => {
+        for (var i in data) {
+            await changeStatus(data[i].r_status, data[i].r_no);
+        }
     }
+    await loop().then(_ => {
+        res.redirect('/housekeeping');
+    })
+
 })
 
-app.post('/getAvailableRooms', jsonParser, (req, res) => {
-    const data = req.body;
-    console.log(data.checkIn + " " + data.checkOut + " " + data.type);
-    getAvailableRooms(data.checkIn, data.checkOut, data.type).then(rooms => {
+
+app.post('/getAvailableRooms', jsonParser, async(req, res) => {
+    const checkInDate = req.body.b_checkIn;
+    const checkOutDate = req.body.b_checkOut;
+    const type = req.body.type;
+    const rooms = req.body.rooms
+
+    req.session.checkIn = checkInDate;
+    req.session.checkOut = checkOutDate;
+    req.session.numrooms = rooms;
+    // console.log(checkInDate + " - " + checkOutDate + " : " + type);
+    getAvailableRooms(checkInDate, checkOutDate, type).then(rooms => {
         req.session.rooms = rooms;
-        res.redirect(307, '/roomList');
+        return res.redirect('/roomList');
     });
+})
+
+app.post('/getAlternative', jsonParser, async(req, res) => {
+    const data = req.body;
+    var alt = {}
+    getAvailableRooms(data.checkIn, data.checkOut, data.type).then(rooms => {
+        alt.rooms = JSON.parse(rooms);
+        getRate(alt.rooms[0].r_class).then(rate => {
+            alt.rate = JSON.parse(rate);
+            res.send(alt);
+        })
+    });
+})
+
+app.get('/listAvailableRooms', (req, res) => {
+    sess = req.session
+
+    rooms = JSON.parse(sess.rooms)
+
+    getRate(rooms[0].r_class).then(rate => {
+        var roomRate = JSON.parse(rate);
+        sess.rate = roomRate;
+        var data = {};
+        data.rooms = rooms;
+        data.checkIn = sess.checkIn;
+        data.checkOut = sess.checkOut;
+        data.rate = roomRate;
+        data.numrooms = sess.numrooms;
+
+        res.send(data);
+    })
 })
 
 //----------------------------------- Database setup -----------------------------------
@@ -132,7 +184,7 @@ async function showAllRates() {
 async function getRate(roomCode) {
     client = await setUpDatabase();
 
-    const query = 'SELECT price FROM rates where r_class=$1'
+    const query = 'SELECT price FROM rates where r_class=$1 LIMIT 1'
     const values = [roomCode]
     const res1 = await client.query(query, values);
 
@@ -140,14 +192,15 @@ async function getRate(roomCode) {
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    console.log(json_str_new);
+    // console.log(json_str_new);
+    return json_str_new;
 }
 
 //----------------------------------- Customer Details -----------------------------------
 async function getAvailableRooms(checkIn, checkOut, roomType) {
     client = await setUpDatabase();
 
-    query = 'SELECT room.r_no FROM room LEFT JOIN (SELECT room.r_no, room.r_class ' +
+    query = 'SELECT room.r_no, room.r_class FROM room LEFT JOIN (SELECT room.r_no, room.r_class ' +
         'FROM room JOIN roombooking ON roombooking.r_no = room.r_no ' +
         'WHERE ((roombooking.checkin <= $1 AND roombooking.checkout > $1) ' +
         'OR (roombooking.checkin < $2 AND roombooking.checkout >= $2))) ' +
@@ -159,7 +212,7 @@ async function getAvailableRooms(checkIn, checkOut, roomType) {
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    console.log(json)
+    // console.log(json)
     return json_str_new
 }
 
@@ -340,15 +393,19 @@ async function getAllRooms() {
 }
 
 async function getCheckedOutRooms() {
-    client = await setUpDatabase();
-
-    query = 'SELECT * FROM room WHERE r_status = $1';
-    values = ['C']
-    const res1 = await client.query(query, values);
-
-    await client.end();
-
-    json = res1.rows;
+    var json;
+    client = await setUpDatabase()
+        .then(client => {
+            query = 'SELECT * FROM room WHERE r_status = $1';
+            values = ['C']
+            return client.query(query, values).then(res => {
+                client.end();
+                json = res.rows;
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
     var json_str_new = JSON.stringify(json);
     // console.log(json);
     return json_str_new;
@@ -356,7 +413,7 @@ async function getCheckedOutRooms() {
 
 async function changeStatus(status, roomNo) {
     client = await setUpDatabase()
-        .then(client => {
+        .then(async client => {
             query = 'UPDATE room SET r_status = $1 WHERE r_no = $2';
             values = [status, roomNo]
             return client.query(query, values)
