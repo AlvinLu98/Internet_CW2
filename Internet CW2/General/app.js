@@ -1,7 +1,11 @@
 //------------------------------------- Variables -------------------------------------
 const express = require('express');
+const url = require('url')
 const router = express.Router();
 const app = express();
+
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 
 const http = require('http')
 const fs = require('fs')
@@ -16,9 +20,48 @@ const connectionString = 'postgresql://groupbe:groupbe@cmp-19teach2.uea.ac.uk/gr
 const dir = __dirname + '/public'
 
 //------------------------------------ Server setup ------------------------------------
-app.use(express.static('./public'));
+app.use(express.static(dir));
+
+app.use(cookieParser())
+app.use(session({
+    key: 1,
+    secret: "secret",
+    cookie: {
+        rooms: [],
+        checkin: new Date(),
+        checkout: new Date()
+    }
+}))
+
 app.listen(8000, () => {
     console.log('Routed app listening to port 8000!');
+})
+
+//----------------------------------- Link functions -----------------------------------
+app.get('/', (req, res) => {
+    res.sendFile(path.join(dir + '/index.html'));
+})
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(dir + '/about.html'));
+})
+
+app.get('/rooms', (req, res) => {
+    res.sendFile(path.join(dir + '/rooms.html'));
+})
+
+app.get('/blog', (req, res) => {
+    res.sendFile(path.join(dir + '/blog.html'));
+})
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(dir + '/contact.html'));
+})
+
+app.get('/roomList', (req, res) => {
+    rooms = req.session.rooms
+    console.log(room)
+    res.sendFile(path.join(dir + '/roomlist.html'));
 })
 
 //--------------------------------- Database functions ---------------------------------
@@ -39,15 +82,15 @@ app.post('/changeStatus', jsonParser, async(req, res) => {
     for (var i in data) {
         await changeStatus(data[i].r_status, data[i].r_no);
     }
-    res.sendFile('/public/index.html', { root: __dirname });
 })
 
-app.post('/getAvailableRooms', jsonParser, async(req, res) => {
+app.post('/getAvailableRooms', jsonParser, (req, res) => {
     const data = req.body;
     console.log(data.checkIn + " " + data.checkOut + " " + data.type);
     getAvailableRooms(data.checkIn, data.checkOut, data.type).then(rooms => {
-        res.send(rooms);
-    })
+        req.session.rooms = rooms;
+        res.redirect(307, '/roomList');
+    });
 })
 
 //----------------------------------- Database setup -----------------------------------
@@ -116,7 +159,8 @@ async function getAvailableRooms(checkIn, checkOut, roomType) {
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    console.log(json);
+    console.log(json)
+    return json_str_new
 }
 
 async function bookRoomExistingCustomer(b_ref, customer_name, email, checkIn, checkOut, roomNo) {
@@ -347,4 +391,4 @@ async function changeStatus(status, roomNo) {
 // checkOutByRoom('C', 101, '2019-01-31', 60)
 // getPaymentType('Danny Keenan')
 
-// viewPayments('Ann Hinchcliffe', '2019-01-16')
+// viewPayments('Ann Hinchcliffe', '2019-01-16')res.sendFile('/index.html')

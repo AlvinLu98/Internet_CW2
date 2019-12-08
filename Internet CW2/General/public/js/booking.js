@@ -12,6 +12,7 @@ function saveForm() {
 
 function onTextReady(text) {
     var json = JSON.parse(text);
+
 }
 
 function onResponse(response) {
@@ -27,15 +28,15 @@ function send_post(path, data) {
                 'Content-Type': 'application/json'
             }
         })
-        .then(onResponse)
-        .then(onTextReady);
+        // .then(onResponse)
+        // .then(onTextReady);
 
 }
 
 
 function onStreamProcessed(text) {
     var obj = JSON.parse(text);
-    alert(obj)
+
 }
 
 // code for fetching data from the server
@@ -54,4 +55,8 @@ function onError(error) {
 function getAvailableRooms() {
     var bookingData = saveForm();
     send_post("getAvailableRooms", bookingData);
+}
+
+function selectRoom(type) {
+    $(`#b_type`).val(type).change()
 }
