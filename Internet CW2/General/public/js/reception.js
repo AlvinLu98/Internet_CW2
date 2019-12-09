@@ -1,12 +1,14 @@
 function saveForm() {
 
     // create an empty object
-    var housekeepingData = {}; // showing elements added dynamically
-
+    var receptionData = {}; // showing elements added dynamically
+    housekeepingData.bref = $('#roomNumber').val(); //get booking ref
+    housekeepingData.cusname = $('#roomNumber').val(); //get customer name
     housekeepingData.roomNumber = $('#roomNumber').val(); //get room number
-    housekeepingData.newStatus = $('#newStatus').val(); //  get room status
+    housekeepingData.cidate = $('#cidate').val(); //get check-in date
+    housekeepingData.codate = $('#codate').val(); //  get check-out date
 
-    return housekeepingData
+    return receptionData
 }
 
 function updateRoomStatus() {
@@ -35,12 +37,12 @@ function onResponse(response) {
 function send_post(path, data) {
 
     fetch(path, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data), // data can be `string` or {object}!
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
         .then(onResponse)
         .then(onTextReady);
 
@@ -105,24 +107,24 @@ function getCheckedOutRooms() {
 function getAllRooms() {
     fetch('allRooms').then(onSuccess, onError).then(onStreamProcessed);
 }
-function goToBookingForm () {
-    location.href = "bookingform.html"
-}
+
 function getbooking() {
     if (val.key.localeCompare(item['bref']) == 0) {
-    fetch('getBookingByName').then(onSuccess, onError).then(onStreamProcessed);
-}else {
-    fetch('getBookingByRef').then(onSuccess, onError).then(onStreamProcessed);
-}
-function checkIn() {
-    fetch('checkIn').then(onSuccess, onError).then(onStreamProcessed);
-}
-function checkOut() {
-    if (val.key.localeCompare(item['bref']) == 0) {
-        fetch('checkOut').then(onSuccess, onError).then(onStreamProcessed);
+        fetch('getBookingByName').then(onSuccess, onError).then(onStreamProcessed);
     } else {
-    fetch('checkOutByRoom').then(onSuccess, onError).then(onStreamProcessed);
+        fetch('getBookingByRef').then(onSuccess, onError).then(onStreamProcessed);
+    }
 }
-function viewPayments() {
-    fetch('getPaymentType').then(onSuccess, onError).then(onStreamProcessed);
-}
+    function checkIn() {
+        fetch('checkIn').then(onSuccess, onError).then(onStreamProcessed);
+    }
+    function checkOut() {
+        if (val.key.localeCompare(item['bref']) == 0) {
+            fetch('checkOut').then(onSuccess, onError).then(onStreamProcessed);
+        } else {
+            fetch('checkOutByRoom').then(onSuccess, onError).then(onStreamProcessed);
+        }
+    }
+    function viewPayments() {
+        fetch('getPaymentType').then(onSuccess, onError).then(onStreamProcessed);
+    }
