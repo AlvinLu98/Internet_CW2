@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
     <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="styles/roomlist.css">
-    <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
+    <link rel="stylesheet" type="text/css" href="styles/responsive.css">
     <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
     <!-- the lines above specify all the HTML definitions you'll need for validation -->
 </head>
@@ -113,7 +113,7 @@
                 <!-- Menu Navigation -->
                 <nav class="menu_nav text-center">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                     </ul>
                 </nav>
                 <div class="button menu_button"><a href="#">book now</a></div>
@@ -131,17 +131,6 @@
 
             </div>
         </div>
-
-        <!-- Home -->
-
-        <div class="home">
-            <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/about.jpg" data-speed="0.8"></div>
-            <div class="home_container d-flex flex-column align-items-center justify-content-center">
-                <div class="home_title">
-                    <h1>About Us</h1>
-                </div>
-            </div>
-        </div>
         <!-- Intro -->
 
         <div class="intro">
@@ -149,40 +138,48 @@
                 <div class="row row-eq-height">
                     <!-- Intro Content -->
                     <div class="col-lg-6">
-                        <div class="roomcheck">
-                            <div class="section_title">
-                                <h1>Available rooms</h1>
+                        <div class="section_title">
+                            <h1>Available rooms</h1>
+                        </div>
+                        <div class="roomcheck_container">
+                            <table class="tableResults" id="availableRooms">
+                                <thead>
+                                    <tr>
+                                        <th class="pic">Pictures | </th>
+                                        <th>Room | </th>
+                                        <th>Type | </th>
+                                        <th>Price | </th>
+                                        <th>Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="info">
+                                </tbody>
+                            </table>
+                            <div class="section_title" id="alternativeRooms">
                             </div>
-                            <div class="roomcheck_container">
-                                <table class="tableResults" id="availableRooms">
-                                    <thead>
-                                        <tr>
-                                            <th class="pic">Pictures | </th>
-                                            <th>Room | </th>
-                                            <th>Type | </th>
-                                            <th>Price | </th>
-                                            <th>Options</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="info">
-                                    </tbody>
-                                </table>
-                                <div class="section_title" id="alternativeRooms">
-                                </div>
-                                <table class="tableResults">
-                                    <thead>
-                                        <tr>
-                                            <th class="pic">Pictures | </th>
-                                            <th>Room | </th>
-                                            <th>Type | </th>
-                                            <th>Price | </th>
-                                            <th>Options</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="altInfo">
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="tableResults">
+                                <thead>
+                                    <tr>
+                                        <th class="pic">Pictures | </th>
+                                        <th>Room | </th>
+                                        <th>Type | </th>
+                                        <th>Price | </th>
+                                        <th>Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="altInfo">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="basket">
+                        <div class="section_title">
+                            <h1> Basket </h1>
+                        </div>
+                        <div class="basket_data">
+                            <table id="basket_table">
+
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -190,5 +187,6 @@
         </div>
     </div>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/custom.js"></script>
     <script src="js/roomlist.js"></script>
 </body>

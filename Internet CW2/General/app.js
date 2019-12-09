@@ -34,7 +34,8 @@ app.use(session({
         checkin: new Date(),
         checkout: new Date(),
         numrooms: 0,
-        rate: []
+        rate: [],
+        basket: []
     }
 }))
 
@@ -143,6 +144,19 @@ app.get('/listAvailableRooms', (req, res) => {
 
         res.send(data);
     })
+})
+
+app.post('/addToBasket', jsonParser, async(req, res) => {
+    const data = req.body;
+    var cart = req.session.basket;
+    if (req.session.basket) {
+        cart.push(data);
+        console.log(cart)
+        req.session.basket = cart;
+    } else {
+        req.session.basket = [data];
+    }
+    console.log(req.session.basket)
 })
 
 //----------------------------------- Database setup -----------------------------------

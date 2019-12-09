@@ -28,8 +28,6 @@ function send_post(path, data) {
             'Content-Type': 'application/json'
         },
         redirect: 'follow'
-    }).then(res => {
-        alert("Am i here")
     })
 
 }

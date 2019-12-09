@@ -8,14 +8,13 @@ function onStreamProcessed(text) {
                 "<td>" + item[`r_no`] + "</td>" +
                 "<td>" + item[`r_class`] + "</td>" +
                 "<td>" + obj.rate[0].price + "</td>" +
-                "<td> <button type='button' onclick='addToList'> Add to cart </button></td></tr>"
+                "<td> <button type='button' onclick='addToList(this)'> Add to cart </button></td></tr>"
             $('#info').append(eachrow);
         });
     }
     if (obj.rooms.length < obj.numrooms) {
         getAlternativeRooms(obj.checkIn, obj.checkOut, getAlternative(obj.rooms[0].r_class))
             .then(values => {
-                console.log(values)
                 $('#alternativeRooms').append('<h1> Alternative rooms</h1>');
                 $('#alternativeRooms').append('<p>*Not enough room time for selected date,' +
                     ' showing alternative</p>');
@@ -25,9 +24,8 @@ function onStreamProcessed(text) {
                         "<td>" + item[`r_no`] + "</td>" +
                         "<td>" + item[`r_class`] + "</td>" +
                         "<td>" + obj.rate[0].price + "</td>" +
-                        "<td> <button type='button' onclick='addToList'>" +
+                        "<td> <button type='button' class='addbasket' onclick='addToList(this)'>" +
                         "Add to cart </button></td></tr>";
-                    console.log(row)
                     $('#altInfo').append(row);
                 })
             })
@@ -61,7 +59,14 @@ function getAlternative(type) {
 }
 
 async function send_post(path, data) {
-
+    console.log(data);
+    await fetch("addToBasket", {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
 }
 
 function onSuccess(response) {
@@ -87,13 +92,29 @@ async function getAlternativeRooms(checkIn, checkOut, type) {
     var alt = {}
     var rooms, rate;
     res = await fetch("getAlternative", {
-        method: 'POST', // or 'PUT'
-        body: JSON.stringify(data), // data can be `string` or {object}!
+        method: 'POST',
+        body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
         },
     });
     values = await res.json();
-    console.log(values)
     return values;
+}
+
+function addToList(element) {
+    row = element.closest('tr');
+
+    var data = {};
+    data.roomNo = row.cells[1].innerHTML;
+    data.roomType = row.cells[2].innerHTML;
+    data.price = row.cells[3].innerHTML;
+
+    send_post('addToBasket', data).then(res => {
+        var row = "<tr>" +
+            "<td>" + data.roomNo + "</td>" +
+            "<td>" + data.roomType + "</td>" +
+            "<td>" + data.price + "</td>"
+        $('#basket_table').append(row);
+    });
 }

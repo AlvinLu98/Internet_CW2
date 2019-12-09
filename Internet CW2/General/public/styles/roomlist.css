@@ -11,12 +11,7 @@
 2. Body and some general stuff
 3. Header
 4. Menu
-5. Home
-6. Booking
-7. Intro
-8. Offering
-9. Discover
-10. Footer
+5. Booking
 
 
 ******************************/
@@ -391,7 +386,6 @@ section {
 
 .header_content {
     width: 100%;
-    height: 289px;
 }
 
 .logo {
@@ -729,42 +723,15 @@ section {
 
 
 /*********************************
-5. Home
-*********************************/
-
-.home {
-    height: 200px;
-    background: transparent;
-}
-
-.home_container {
-    width: 100%;
-    height: 100%;
-    padding-top: 228px;
-}
-
-.home_title h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    color: #ffffff;
-    font-style: italic;
-    font-size: 72px;
-}
-
-
-/*********************************
-6. Intro
+5. Intro
 *********************************/
 
 .intro {
     width: 100%;
     background: #ffffff;
-    padding-top: 142px;
+    padding-top: 270px;
     padding-bottom: 110px;
-}
-
-.intro_text {
-    margin-top: 49px;
+    float: left;
 }
 
 .intro_button {
@@ -779,10 +746,15 @@ section {
     display: none;
 }
 
+.roomcheck {
+    width: 35vw;
+}
+
 .tableResults {
     width: 100%;
     text-align: right;
     border: 1;
+    padding-bottom: 5px;
 }
 
 .tableResults .pic {
@@ -796,4 +768,10 @@ th {
 
 #alternativeRooms {
     margin-top: 30px;
+}
+
+.basket {
+    width: 35vw;
+    float: right;
+    text-align: right;
 }

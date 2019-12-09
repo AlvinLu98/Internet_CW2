@@ -14,19 +14,6 @@
 
 
 ******************************/
-const express = require('express')
-const router = express.Router();
-
-router.get('/about', (req, res) => {
-    res.send('/about.html')
-})
-
-router.post('/about', (req, res) => {
-    res.send('/about.html')
-})
-
-module.export = router
-
 $(document).ready(function() {
     "use strict";
 
