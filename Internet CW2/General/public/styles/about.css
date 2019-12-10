@@ -121,7 +121,7 @@ p a:hover::after
 }
 p::selection
 {
-	
+
 }
 h1{font-size: 48px;}
 h2{font-size: 36px;}
@@ -137,14 +137,14 @@ h1, h2, h3, h4, h5, h6
 	line-height: 1.2;
 	margin-bottom: 0;
 }
-h1::selection, 
-h2::selection, 
-h3::selection, 
-h4::selection, 
-h5::selection, 
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
 h6::selection
 {
-	
+
 }
 img
 {
@@ -783,9 +783,9 @@ section
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: #4a4f59 !important;
-} 
+}
 .booking_input:-ms-input-placeholder
-{ 
+{
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: #4a4f59 !important;
@@ -866,7 +866,7 @@ section
 }
 .select-selected.select-arrow-active:after
 {
-	
+
 }
 .select-items div,.select-selected
 {
@@ -942,6 +942,7 @@ section
 	background: #211c32;
 	padding-top: 104px;
 	padding-bottom: 50px;
+	width: 100%;
 }
 .offering .section_title > div
 {
@@ -959,6 +960,9 @@ section
 .offer
 {
 	margin-bottom: 60px;
+	/* position: relative;
+	magin-left: auto;
+	margin-right: auto; */
 }
 .offer_title
 {
