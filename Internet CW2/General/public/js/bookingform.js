@@ -1,16 +1,3 @@
-function saveForm() {
-
-    // create an empty object
-    var customerData = {}; // showing elements added dynamically
-    customerData.name = $('#name').val(); // get a radio button value
-    customerData.email = $('#email').val(); // gets a single value
-    customerData.phone = $('#phone').val();
-    customerData.adress = $('#hono').val() + ", " + $('#street').val() + ", " +
-        $('#city').val() + ", " + $('#country').val() + ", " + $('#postcode').val()
-
-    return customerData
-};
-
 function loadBasket() {
     fetch("basketData").then(onSuccess, onError).then(onStreamProcessed)
     fetch('getBookingDetails').then(res => {
@@ -44,19 +31,4 @@ function onStreamProcessed(text) {
             "<td>" + rooms.price + "</td>";
         $('#basket_table').append(row);
     })
-}
-
-async function send_post(path, data) {
-    fetch(path, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-}
-
-function goToPayment() {
-    data = saveForm();
-    send_post("goToPayment", data)
 }

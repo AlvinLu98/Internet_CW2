@@ -35,7 +35,7 @@ app.use(session({
         checkout: new Date(),
         numrooms: 0,
         rate: [],
-        basket: { item: [] }
+        basket: { item: [] },
         customer: {}
     }
 }))
@@ -86,6 +86,10 @@ app.get('/bookingForm', (req, res) => {
 })
 
 app.get('/payment', (req, res) => {
+    res.sendFile(path.join(dir + '/bookingform.html'))
+})
+
+app.get('/confirmation', (req, res) => {
     res.sendFile(path.join(dir + '/bookingform.html'))
 })
 
@@ -221,11 +225,54 @@ app.post('/getBookingByName', jsonParser, async(req, res) => {
 })
 
 app.post('/goToPayment', jsonParser, async(req, res) => {
-    const data = req.body
+    const data = {};
+    data.name = req.body.name;
+    data.email = req.body.email;
+    data.phone = req.body.phone;
+    data.address = req.body.hono + " " + req.body.street + ", " + req.body.city +
+        ", " + req.body.country + ", " + req.body.postcode;
     sess = req.session;
-    sess.customer = data;
-    res.sendFile(path.join(dir + '/payment.html'))
+    sess.customer = JSON.stringify(data);
+    res.sendFile(path.join(dir + '/paymentform.html'))
+})
 
+app.post('/completeBooking', jsonParser, async(req, res) => {
+    const card_type = req.body.cardtype
+    const card_no = req.body.cardno
+    var card_exp = req.body.cexdate
+    const notes = req.body.notes
+    const basket = req.session.basket
+    var cus_no;
+    var total = 0;
+    const checkIn = req.session.checkIn;
+    const checkOut = req.session.checkOut;
+
+    card_exp = card_exp.substr(-2) + "/" + card_exp.substr(2, 2)
+
+    const cus = JSON.parse(req.session.customer);
+    addNewCustomer(cus.name, cus.email, cus.address, card_type, card_exp, card_no).then(_ => {
+        customerDetails(cus.name, cus.email).then(customer => {
+            var data = JSON.parse(customer)
+            cus_no = data[0].c_no;
+            for (i = 0; i < basket.item.length; i++) {
+                total = total + parseFloat(basket.item[i].price);
+            }
+            createNewBooking(cus_no, total, notes).then(_ => {
+                getBookingRef(cus_no, total).then(b_ref => {
+                    data = JSON.parse(b_ref)
+                    const createBooking = async _ => {
+                        for (i = 0; i < basket.item.length; i++) {
+                            console.log(checkIn + " " + checkOut)
+                            await createRoomBookings(basket.item[i].roomNo, data[0].b_ref, checkIn, checkOut)
+                        }
+                    }
+                    createBooking().then(_ => {
+                        res.redirect("/confirmation")
+                    })
+                })
+            })
+        })
+    })
 })
 
 //----------------------------------- Database setup -----------------------------------
@@ -318,25 +365,64 @@ async function addNewCustomer(c_name, c_email, c_add, card_type, card_expiry, ca
     client = await setUpDatabase();
 
     query = 'INSERT INTO customer(c_name, c_email, c_address, c_cardtype, c_cardexp, c_cardno) ' +
-        'VALUES $1, $2, $3, $4, $5, $6'
+        'VALUES ($1, $2, $3, $4, $5, $6)'
     var values = [c_name, c_email, c_add, card_type, card_expiry, card_no];
-    await client.query(query, values)
+    var res = await client.query(query, values)
 
     await client.end();
 
-    json = res1.rows;
+    json = res.rows;
     var json_str_new = JSON.stringify(json);
+    // console.log(json);
+    return json_str_new
 }
 
-async function createNewBooking(c_name, c_email, checkIn, checkOut) {
+async function createNewBooking(c_no, cost, notes) {
     client = await setUpDatabase();
 
-    query = 'SELECT c_no FROM customer WHERE c_name=$1 AND c_email=$2'
-    var values = [c_name, c_email];
-    client.query(query, values).then(res => {
-        var c_no = res.rows
-        console.log(c_no)
-    })
+    query = 'INSERT INTO booking(c_no, b_cost, b_outstanding, b_notes) ' +
+        'VALUES ($1, $2, $2, $3)'
+    var values = [c_no, cost, notes];
+    var res = await client.query(query, values)
+
+    await client.end();
+
+    json = res.rows;
+    var json_str_new = JSON.stringify(json);
+    // console.log(json);
+    return json_str_new
+}
+
+async function getBookingRef(c_no, cost) {
+    client = await setUpDatabase();
+
+    query = 'SELECT b_ref FROM booking WHERE c_no=$1 AND b_cost=$2 ORDER BY b_ref DESC'
+    var values = [c_no, cost];
+    var res = await client.query(query, values);
+
+    await client.end();
+
+    json = res.rows;
+    var json_str_new = JSON.stringify(json);
+    // console.log(json);
+    return json_str_new
+}
+
+
+
+async function createRoomBookings(r_no, b_ref, checkIn, checkOut) {
+    client = await setUpDatabase();
+
+    query = 'INSERT INTO roombooking VALUES ($1, $2, $3, $4)'
+    var values = [r_no, b_ref, checkIn, checkOut];
+    var res = await client.query(query, values)
+
+    await client.end();
+
+    json = res.rows;
+    var json_str_new = JSON.stringify(json);
+    // console.log(json);
+    return json_str_new
 }
 
 async function customerDetails(customer_name, email) {
@@ -350,7 +436,8 @@ async function customerDetails(customer_name, email) {
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    console.log(json);
+    // console.log(json);
+    return json_str_new
 }
 
 //----------------------------------- Reception queries -----------------------------------

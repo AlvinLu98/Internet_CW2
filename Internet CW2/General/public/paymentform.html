@@ -112,10 +112,23 @@
     </div>
     <!--  General -->
     <div class="mainarea">
-        <div class="section_title">
-            <h2>Payment</h2>
+        <div class="details">
+            <div class="section_title">
+                <h1> Details </h1>
+            </div>
+            <div class="basket_data">
+                <table id="details_table">
+
+                </table>
+                <form action="/bookingForm">
+                    <button type="submit" action="/rooms">Change</button>
+                </form>
+            </div>
         </div>
-        <form id="bookingForm">
+        <div class="section_title">
+            <h1>Payment</h1>
+        </div>
+        <form id="bookingForm" action="/completeBooking" method="POST">
             <div class="left_half">
                 <div class="formblock">
                     <div class="row">
@@ -123,50 +136,48 @@
                             <label for="visa">Card Type</label>
                         </div>
                         <div class="col-75">
-                            <label for="visad">Visa Debit</label> <input type="checkbox" id="visad" value="visa_debit">
-                            <label for="visac">Visa Credit</label> <input type="checkbox" id="visac" value="visa_credit">
-                            <label for="mastercard">Mastercard</label> <input type="checkbox" id="mastercard" value="mastercard">
+                            <select id="p_cardtype" name="cardtype">
+                                    <option value="V">Visa Debit</option>
+                                    <option value="A">American Express</option>
+                                    <option value="V">Mastercard</option>
+                            </select>
                         </div>
                     </div>
-                        <div class="row">
-                            <div class="col-25">
-                                <label for="name">Cardholder's Name</label>
-                            </div>
-                            <div class="col-75">
-                                <input type="text" id="name" size="25" placeholder="Enter cardholder's name here">
-                            </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="name">Cardholder's Name</label>
                         </div>
-                        <div class="row">
-                            <div class="col-25">
-                                <label for="name">Card Number</label>
-                            </div>
-                            <div class="col-75">
-                                <input type="text" id="name" size="25" placeholder="Enter card number here">
-                            </div>
+                        <div class="col-75">
+                            <input type="text" name="name" size="25" placeholder="Enter cardholder's name here">
                         </div>
-                        <div class="row">
-                            <div class="col-25">
-                                <label for="hono">Billing Address</label>
-                            </div>
-                            <div class="col-75">
-                                <input type="text" id="hono" placeholder="House Name or Number">
-                                <input type="text" id="street" placeholder="Street Name">
-                                <input type="text" id="city" placeholder="City">
-                                <input type="text" id="city" placeholder="Country">
-                                <input type="text" id="city" placeholder="Post Code">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="name">Card Number</label>
                         </div>
-                        <div class="row">
-                            <div class="col-25">
-                                <label for="cexdate">Card Expiry Date</label>
-                            </div>
-                            <div class="col-75">
-                                <input type="date" id="cexdate">
-                            </div>
+                        <div class="col-75">
+                            <input type="text" name="cardno" size="25" placeholder="Enter card number here">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="cexdate">Card Expiry Date</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="month" name="cexdate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="cexdate">Notes to us</label>
+                        </div>
+                        <div class="col-75">
+                            <textarea name="notes" cols="40" rows="4"></textarea>
                         </div>
                     </div>
                 </div>
-            
+            </div>
+
             <!--  Details -->
             <div class="right_half">
                 <div class="formblock">
@@ -181,7 +192,7 @@
                 </div>
                 <div class="row">
                     <div class="col-75">
-                        <input type="submit" action="/payment" value="Submit Payment Details" />
+                        <input type="submit" value="Submit Payment Details" />
                     </div>
                 </div>
             </div>
