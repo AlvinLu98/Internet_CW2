@@ -56,8 +56,8 @@ app.get('/rooms', (req, res) => {
     res.sendFile(path.join(dir + '/rooms.html'));
 })
 
-app.get('/blog', (req, res) => {
-    res.sendFile(path.join(dir + '/blog.html'));
+app.get('/restaurant', (req, res) => {
+    res.sendFile(path.join(dir + '/Restaurant.html'));
 })
 
 app.get('/contact', (req, res) => {
@@ -84,6 +84,17 @@ app.get('/bookingForm', (req, res) => {
     res.sendFile(path.join(dir + '/bookingform.html'))
 })
 
+app.get('/paymentForm', (req, res) => {
+    res.sendFile(path.join(dir + '/paymentform.html'))
+})
+
+app.get('/meetingRooms', (req, res) => {
+    res.sendFile(path.join(dir + '/meetingrooms.html'))
+})
+
+app.get('/gym', (req, res) => {
+    res.sendFile(path.join(dir + '/Gym.html'))
+})
 //--------------------------------- Database functions ---------------------------------
 app.get('/allRooms', (req, res) => {
     getAllRooms().then(data => {
