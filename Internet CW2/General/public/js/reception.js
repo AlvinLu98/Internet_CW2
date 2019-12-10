@@ -1,32 +1,29 @@
-function saveForm() {
+function saveRefForm() {
 
     // create an empty object
     var receptionData = {}; // showing elements added dynamically
-    housekeepingData.bref = $('#bref').val(); //get booking ref
-    housekeepingData.cusname = $('#cname').val(); //get customer name
-    housekeepingData.roomNumber = $('#roomNumber').val(); //get room number
-    housekeepingData.cidate = $('#cidate').val(); //get check-in date
-    housekeepingData.codate = $('#codate').val(); //  get check-out date
-
+    receptionData.b_ref = $('#b_ref').val(); //get booking ref
     return receptionData
 }
 
-function updateRoomStatus() {
-    var data = saveForm();
+function saveNameForm() {
 
-    console.log(data);
-
-    send_post(data); // submit data via POST
-
+    // create an empty object
+    var receptionData = {}; // showing elements added dynamically
+    receptionData.custName = $('#cName').val(); //get customer name
+    receptionData.checkIn = $('#cidate').val(); //get check-in date
+    receptionData.checkOut = $('#codate').val(); //  get check-out date
+    return receptionData
 }
 
 function onTextReady(text) {
 
-    console.log(text);
-
     var json = JSON.parse(text);
-
-    $('#ret').html(json.roomNumber + ", " + json.newStatus);
+    alert(json)
+    $('#c_name').html("Name: " + json.c_name);
+    $('#c_checkIn').html("Check in: " + json.b_ref);
+    $('#c_checkOut').html("Check out: " + json.checkin);
+    $('#c_ref').html("Booking ref: " + json.checkout);
 }
 
 function onResponse(response) {
@@ -37,16 +34,16 @@ function onResponse(response) {
 function send_post(path, data) {
 
     fetch(path, {
-        method: 'POST', // or 'PUT'
-        body: JSON.stringify(data), // data can be `string` or {object}!
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         .then(onResponse)
         .then(onTextReady);
 
-}
+};
 
 function onStreamProcessed(text) {
     var obj = JSON.parse(text);
@@ -101,30 +98,28 @@ function onError(error) {
     console.log('Error: ' + error);
 }
 
-function getCheckedOutRooms() {
-    fetch('checkedOut').then(onSuccess, onError).then(onStreamProcessed);
-}
-function getAllRooms() {
-    fetch('allRooms').then(onSuccess, onError).then(onStreamProcessed);
+function getbookingRef() {
+    data = saveRefForm();
+    send_post('getBookingByRef', data)
 }
 
-function getbooking() {
+function getbookingName() {
+    data = saveNameForm();
+    send_post('getBookingByName', data)
+}
+
+function checkIn() {
+    fetch('checkIn()').then(onSuccess, onError).then(onStreamProcessed);
+}
+
+function checkOut() {
     if (val.key.localeCompare(item[$.bref]) == 0) {
-        fetch('getBookingByName($(#cname)').then(onSuccess, onError).then(onStreamProcessed);
+        fetch('checkOut($(#bref)').then(onSuccess, onError).then(onStreamProcessed);
     } else {
-        fetch('getBookingByRef($(#bref)').then(onSuccess, onError).then(onStreamProcessed);
+        fetch('checkOutByRoom($(#codate)').then(onSuccess, onError).then(onStreamProcessed);
     }
 }
-    function checkIn() {
-        fetch('checkIn()').then(onSuccess, onError).then(onStreamProcessed);
-    }
-    function checkOut() {
-        if (val.key.localeCompare(item[$.bref]) == 0) {
-            fetch('checkOut($(#bref)').then(onSuccess, onError).then(onStreamProcessed);
-        } else {
-            fetch('checkOutByRoom($(#codate)').then(onSuccess, onError).then(onStreamProcessed);
-        }
-    }
-    function viewPayments() {
-        fetch('getPaymentType').then(onSuccess, onError).then(onStreamProcessed);
-    }
+
+function viewPayments() {
+    fetch('getPaymentType').then(onSuccess, onError).then(onStreamProcessed);
+}

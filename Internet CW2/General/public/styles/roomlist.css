@@ -729,9 +729,8 @@ section {
 .intro {
     width: 100%;
     background: #ffffff;
-    padding-top: 270px;
+    padding-top: 20vw;
     padding-bottom: 110px;
-    float: left;
 }
 
 .intro_button {
@@ -744,6 +743,12 @@ section {
 
 .intro_image>img {
     display: none;
+}
+
+.roomcheck_container {
+    width: 50vw;
+    float: left;
+    margin-left: 5vw;
 }
 
 .roomcheck {
@@ -770,8 +775,76 @@ th {
     margin-top: 30px;
 }
 
+.details {
+    width: 75vw;
+    height: 25vh;
+    clear: both;
+    padding-left: 5px;
+    margin-left: 5vw;
+    margin-bottom: 20px;
+    background-color: #E0E0E0;
+}
+
+.details h1 {
+    padding-top: 15px;
+}
+
+#details_table td {
+    font-size: large;
+    color: black;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 .basket {
-    width: 35vw;
-    float: right;
-    text-align: right;
+    width: 20vw;
+    height: 30vh;
+    float: left;
+    margin-left: 5vw;
+    padding-left: 10px;
+    background-color: #E0E0E0;
+}
+
+.basket h1 {
+    padding-top: 15px;
+}
+
+#basket_table {
+    overflow: scroll;
+}
+
+#basket_table td {
+    font-size: large;
+    color: black;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#goToCheckOut {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .intro {
+        width: 100%;
+        background: #ffffff;
+        padding-top: 25vw;
+        padding-bottom: 110px;
+    }
+    .details {
+        width: 90vw;
+    }
+    .roomcheck_container {
+        width: 90vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+    .basket {
+        width: 75vw;
+        position: relative;
+    }
 }

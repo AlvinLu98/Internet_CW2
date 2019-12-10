@@ -1,5 +1,11 @@
 function onStreamProcessed(text) {
     var obj = JSON.parse(text);
+
+    $('#details_table').empty()
+    $('#details_table').append('<tr><td>Check in: </td><td>' + obj.checkIn + '</td></tr>')
+    $('#details_table').append('<tr><td>Check in: </td><td>' + obj.checkOut + '</td></tr>')
+    $('#details_table').append('<tr><td>Number of rooms: </td><td>' + obj.numrooms + '</td></tr>')
+
     $('#info').empty()
     if (obj.rooms.length > 0) {
         $.each(obj.rooms, (index, item) => {
@@ -18,6 +24,10 @@ function onStreamProcessed(text) {
                 $('#alternativeRooms').append('<h1> Alternative rooms</h1>');
                 $('#alternativeRooms').append('<p>*Not enough room time for selected date,' +
                     ' showing alternative</p>');
+                $('#altInfoHead').append(
+                    '<tr> <th class="pic">Pictures | </th> <th>Room | </th>' +
+                    '<th>Type | </th> <th>Price | </th> <th>Options</th> </tr>'
+                )
                 $.each(values.rooms, (index, item) => {
                     var row = "<tr>" +
                         "<td class='pic'>" + findImage(item['r_class']) + "</td>" +
@@ -59,14 +69,31 @@ function getAlternative(type) {
 }
 
 async function send_post(path, data) {
-    console.log(data);
-    await fetch("addToBasket", {
+    fetch(path, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
         },
+    }).then(res => {
+        res.json().then(fillBasket)
     });
+}
+
+function fillBasket(data) {
+    $('#basket_table').empty();
+    $.each(data.item, (i, rooms) => {
+        var row = "<tr>" +
+            "<td>" + rooms.roomNo + "</td>" +
+            "<td>" + rooms.roomType + "</td>" +
+            "<td>" + rooms.price + "</td>" +
+            '<td><button type="button" onclick="deleteFromBasket(this)">X</button></td>'
+        $('#basket_table').append(row);
+
+        var row = $('#info tr').find('td:eq(1):contains(' + rooms.roomNo + ')').parent();
+        row[0].cells[4].innerHTML = "<button type='button' class='addbasket' onclick='addToList(this)'" +
+            "style='display:none'>Add to cart </button></td></tr>";
+    })
 }
 
 function onSuccess(response) {
@@ -81,7 +108,13 @@ function onError(error) {
 }
 
 function listRooms() {
-    fetch('listAvailableRooms').then(onSuccess, onError).then(onStreamProcessed);
+    fetch('listAvailableRooms').then(onSuccess, onError).then(onStreamProcessed).then(_ => {
+        fetch('basketData').then(res => {
+            res.json().then(data => {
+                fillBasket(data.basket);
+            })
+        });
+    })
 }
 
 async function getAlternativeRooms(checkIn, checkOut, type) {
@@ -103,18 +136,36 @@ async function getAlternativeRooms(checkIn, checkOut, type) {
 }
 
 function addToList(element) {
+    var row = $('#details_table tr').find('td:eq(0):contains(Number of rooms: )').parent();
+    var rooms = row[0].cells[1].innerHTML;
+    var curRooms = $('#basket_table tr').length;
+    console.log(curRooms)
+    if (rooms > curRooms) {
+        element.style.display = 'none'
+        row = element.closest('tr');
+
+        var data = {};
+        data.roomNo = row.cells[1].innerHTML;
+        data.roomType = row.cells[2].innerHTML;
+        data.price = row.cells[3].innerHTML;
+
+        send_post('addToBasket', data);
+    } else {
+        alert("You've already selected " + rooms + " rooms!")
+    }
+}
+
+function deleteFromBasket(element) {
     row = element.closest('tr');
 
     var data = {};
-    data.roomNo = row.cells[1].innerHTML;
-    data.roomType = row.cells[2].innerHTML;
-    data.price = row.cells[3].innerHTML;
+    data.roomNo = row.cells[0].innerHTML;
+    data.roomType = row.cells[1].innerHTML;
+    data.price = row.cells[2].innerHTML;
 
-    send_post('addToBasket', data).then(res => {
-        var row = "<tr>" +
-            "<td>" + data.roomNo + "</td>" +
-            "<td>" + data.roomType + "</td>" +
-            "<td>" + data.price + "</td>"
-        $('#basket_table').append(row);
-    });
+    var row = $('#info tr').find('td:eq(1):contains(' + data.roomNo + ')').parent();
+    row[0].cells[4].innerHTML = "<button type='button' class='addbasket' onclick='addToList(this)'>" +
+        "Add to cart </button></td></tr>";
+
+    send_post('removeFromBasket', data);
 }

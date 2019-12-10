@@ -35,7 +35,7 @@ app.use(session({
         checkout: new Date(),
         numrooms: 0,
         rate: [],
-        basket: []
+        basket: { item: [] }
     }
 }))
 
@@ -70,6 +70,18 @@ app.get('/housekeeping', (req, res) => {
 
 app.get('/roomList', (req, res) => {
     res.sendFile(path.join(dir + '/roomlist.html'));
+})
+
+app.get('/checkInReception', (req, res) => {
+    res.sendFile(path.join(dir + '/checkin.html'));
+})
+
+app.get('/checkOutReception', (req, res) => {
+    res.sendFile(path.join(dir + '/checkout.html'));
+})
+
+app.get('/bookingForm', (req, res) => {
+    res.sendFile(path.join(dir + '/bookingform.html'))
 })
 
 //--------------------------------- Database functions ---------------------------------
@@ -148,15 +160,49 @@ app.get('/listAvailableRooms', (req, res) => {
 
 app.post('/addToBasket', jsonParser, async(req, res) => {
     const data = req.body;
-    var cart = req.session.basket;
     if (req.session.basket) {
-        cart.push(data);
-        console.log(cart)
+        var cart = req.session.basket
+        cart['item'].push(data)
         req.session.basket = cart;
     } else {
-        req.session.basket = [data];
+        req.session.basket = { item: [data] };
     }
     console.log(req.session.basket)
+    res.send(req.session.basket);
+})
+
+app.post('/removeFromBasket', jsonParser, async(req, res) => {
+    const data = req.body;
+    var cart = req.session.basket
+    cart['item'] = cart['item'].filter(item => item.roomNo != data.roomNo)
+
+    req.session.basket = cart;
+    // console.log(req.session.basket)
+    res.send(req.session.basket);
+})
+
+app.get('/basketData', (req, res) => {
+    sess = req.session;
+    data = {}
+    data.checkIn = sess.checkIn;
+    data.checkOut = sess.checkOut;
+    data.basket = sess.basket;
+    res.send(data)
+})
+
+app.post('/getBookingByRef', jsonParser, async(req, res) => {
+    const data = req.body
+    getBookingByRef(data.b_ref).then(booking => {
+        res.send(booking)
+    })
+})
+
+app.post('/getBookingByName', jsonParser, async(req, res) => {
+    const data = req.body
+    getBookingByName(data.custName, data.checkIn, data.checkOut).then(booking => {
+        console.log(booking)
+        res.send(booking)
+    })
 })
 
 //----------------------------------- Database setup -----------------------------------
@@ -272,13 +318,14 @@ async function getBookingByName(custName, checkIn, checkOut) {
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    console.log(json);
+    // console.log(json);
+    return json_str_new
 }
 
 async function getBookingByRef(bookingRef) {
     client = await setUpDatabase();
 
-    var query = 'SELECT cust.c_name,  b.b_ref, rb.checkin, rb.checkout ' +
+    var query = 'SELECT cust.c_name,  b.b_ref, rb.checkin, rb.checkout, ' +
         'FROM customer cust JOIN booking b ON cust.c_no = b.c_no JOIN roombooking rb ON b.b_ref = rb.b_ref ' +
         'WHERE b.b_ref = $1 ';
     var values = [bookingRef];
@@ -288,7 +335,8 @@ async function getBookingByRef(bookingRef) {
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    console.log(json);
+    // console.log(json);
+    return json_str_new
 }
 
 async function getRoomStatus() {
