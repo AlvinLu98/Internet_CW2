@@ -85,6 +85,18 @@ app.get('/bookingForm', (req, res) => {
     res.sendFile(path.join(dir + '/bookingform.html'))
 })
 
+app.get('/paymentForm', (req, res) => {
+    res.sendFile(path.join(dir + '/roomlist.html'));
+})
+
+app.get('/gym', (req, res) => {
+    res.sendFile(path.join(dir + '/Gym.html'));
+})
+
+app.get('/meetingRooms', (req, res) => {
+    res.sendFile(path.join(dir + '/meetingrooms.html'));
+})
+
 //--------------------------------- Database functions ---------------------------------
 app.get('/allRooms', (req, res) => {
     getAllRooms().then(data => {
