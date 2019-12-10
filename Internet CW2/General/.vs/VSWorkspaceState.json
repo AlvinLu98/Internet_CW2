@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\public",
+    "\\public\\js"
   ],
-  "SelectedNode": "\\public",
+  "SelectedNode": "\\public\\roomlist.html",
   "PreviewInSolutionExplorer": false
 }
