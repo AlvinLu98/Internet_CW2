@@ -36,7 +36,8 @@ app.use(session({
         numrooms: 0,
         rate: [],
         basket: { item: [] },
-        customer: {}
+        customer: {},
+        bref: 0
     }
 }))
 
@@ -98,7 +99,7 @@ app.get('/meetingRooms', (req, res) => {
 })
 
 app.get('/confirmation', (req, res) => {
-    res.sendFile(path.join(dir + '/bookingform.html'))
+    res.sendFile(path.join(dir + '/bookingconfirmation.html'))
 })
 
 //--------------------------------- Database functions ---------------------------------
@@ -220,14 +221,14 @@ app.get('/basketData', (req, res) => {
 app.post('/getBookingByRef', jsonParser, async(req, res) => {
     const data = req.body
     getBookingByRef(data.b_ref).then(booking => {
-        res.send(booking)
+        console.log(JSON.parse(booking))
+        res.send(booking);
     })
 })
 
 app.post('/getBookingByName', jsonParser, async(req, res) => {
     const data = req.body
     getBookingByName(data.custName, data.checkIn, data.checkOut).then(booking => {
-        console.log(booking)
         res.send(booking)
     })
 })
@@ -264,10 +265,12 @@ app.post('/completeBooking', jsonParser, async(req, res) => {
             cus_no = data[0].c_no;
             for (i = 0; i < basket.item.length; i++) {
                 total = total + parseFloat(basket.item[i].price);
+                req.session.total = total;
             }
             createNewBooking(cus_no, total, notes).then(_ => {
                 getBookingRef(cus_no, total).then(b_ref => {
                     data = JSON.parse(b_ref)
+                    req.session.b_ref = b_ref
                     const createBooking = async _ => {
                         for (i = 0; i < basket.item.length; i++) {
                             console.log(checkIn + " " + checkOut)
@@ -282,8 +285,23 @@ app.post('/completeBooking', jsonParser, async(req, res) => {
         })
     })
 })
+
+app.get('/confirmationDetails', (req, res) => {
+    data = {}
+    s = req.session
+    data.b_ref = s.b_ref
+    data.cust = JSON.parse(s.customer);
+    data.checkIn = s.checkIn;
+    data.checkOut = s.checkOut;
+    data.basket = s.basket;
+    data.numrooms = s.numrooms
+    data.total = s.total;
+    console.log(data)
+    res.send(data)
+})
+
 app.get('/checkIn', (req, res) => {
-    checkIn(C, data.b_ref).then(data => {
+    checkIn('C', data.b_ref).then(data => {
         return res.send(data);
     });
 })
@@ -474,7 +492,7 @@ async function getBookingByName(custName, checkIn, checkOut) {
 async function getBookingByRef(bookingRef) {
     client = await setUpDatabase();
 
-    var query = 'SELECT cust.c_name,  b.b_ref, rb.checkin, rb.checkout, ' +
+    var query = 'SELECT cust.c_name,  b.b_ref, rb.checkin, rb.checkout ' +
         'FROM customer cust JOIN booking b ON cust.c_no = b.c_no JOIN roombooking rb ON b.b_ref = rb.b_ref ' +
         'WHERE b.b_ref = $1 ';
     var values = [bookingRef];
@@ -513,7 +531,8 @@ async function checkIn(status, booking_ref) {
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    console.log(json);
+    // console.log(json);
+    return json_str_new;
 }
 
 async function checkOut(status, booking_ref, payments) {
@@ -659,4 +678,4 @@ async function changeStatus(status, roomNo) {
 // checkOutByRoom('C', 101, '2019-01-31', 60)
 // getPaymentType('Danny Keenan')
 
-// viewPayments('Ann Hinchcliffe', '2019-01-16')res.sendFile('/index.html')
+// viewPayments('Ann Hinchcliffe', '2019-01-16')res.sendFile('/index.html');

@@ -16,33 +16,24 @@ function saveNameForm() {
     return receptionData
 }
 
-function onTextReady(text) {
-
-    var json = JSON.parse(text);
-    alert(json)
-    $('#c_name').html("Name: " + json.c_name);
-    $('#c_checkIn').html("Check in: " + json.b_ref);
-    $('#c_checkOut').html("Check out: " + json.checkin);
-    $('#c_ref').html("Booking ref: " + json.checkout);
-}
-
-function onResponse(response) {
-    return response.text();
-}
-
 // submit data for storage using the POST method
 function send_post(path, data) {
-
     fetch(path, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data), // data can be `string` or {object}!
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(onResponse)
-        .then(onTextReady);
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        res.json().then(data => {
 
+            rows = "<tr><td>Name: " + data[0].c_name + "</td></tr>" +
+                "<tr><td>Check in: " + data[0].b_ref + "</td></tr>" +
+                "<tr><td>Check out: " + data[0].checkin.substr(0, 10) + "</td></tr>" +
+                "<tr><td>Booking ref: " + data[0].checkout.substr(0, 10) + "</td></tr>";
+            $('#c_booking').append(rows)
+        })
+    })
 };
 
 function onStreamProcessed(text) {
@@ -100,6 +91,7 @@ function onError(error) {
 
 function getbookingRef() {
     data = saveRefForm();
+    $('#b_ref').val("");
     send_post('getBookingByRef', data)
 }
 
@@ -113,7 +105,6 @@ function getAllRooms() {
 }
 
 function checkIn() {
-    
     fetch('checkIn').then(onSuccess, onError).then(onStreamProcessed);
     window.alert("Check In Complete");
 }
