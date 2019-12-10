@@ -236,7 +236,7 @@ app.post('/goToPayment', jsonParser, async(req, res) => {
 
 })
 app.get('/checkIn', (req, res) => {
-    checkIn(C,data.b_ref).then(data => {
+    checkIn(C, data.b_ref).then(data => {
         return res.send(data);
     });
 })
