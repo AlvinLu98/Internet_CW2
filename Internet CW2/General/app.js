@@ -35,7 +35,7 @@ app.use(session({
         checkout: new Date(),
         numrooms: 0,
         rate: [],
-        basket: { item: [] }
+        basket: { item: [] },
         customer: {}
     }
 }))

@@ -113,7 +113,7 @@ function getAllRooms() {
 }
 
 function checkIn() {
-    console.log('Checking in - Error Testing');
+    
     fetch('checkIn').then(onSuccess, onError).then(onStreamProcessed);
     window.alert("Check In Complete");
 }
