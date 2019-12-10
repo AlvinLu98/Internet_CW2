@@ -57,8 +57,8 @@ app.get('/rooms', (req, res) => {
     res.sendFile(path.join(dir + '/rooms.html'));
 })
 
-app.get('/blog', (req, res) => {
-    res.sendFile(path.join(dir + '/blog.html'));
+app.get('/restaurant', (req, res) => {
+    res.sendFile(path.join(dir + '/Restaurant.html'));
 })
 
 app.get('/contact', (req, res) => {
@@ -82,10 +82,6 @@ app.get('/checkOutReception', (req, res) => {
 })
 
 app.get('/bookingForm', (req, res) => {
-    res.sendFile(path.join(dir + '/bookingform.html'))
-})
-
-app.get('/payment', (req, res) => {
     res.sendFile(path.join(dir + '/bookingform.html'))
 })
 
