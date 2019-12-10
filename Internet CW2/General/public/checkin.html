@@ -125,7 +125,7 @@
                     </div>
                     <div class="row">
                         <div class="col-75">
-                            <input type="submit" onclick="getbookingRef()" value="Find Booking" />
+                            <input type="button" onclick="getbookingRef()" value="Find Booking" />
                         </div>
                     </div>
                 </form>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="row">
                         <div class="col-75">
-                            <input type="submit" onclick="getbookingName()" value="Find Booking" />
+                            <input type="button" onclick="getbookingName()" value="Find Booking" />
                             <input type="submit" onclick="checkIn()" value="Check In" />
                         </div>
                     </div>
@@ -168,15 +168,26 @@
 
 
             <div class="right_half">
-                <div class="Custimer details" id="c_details">
-                    <p id="c_name"> </p>
-                    <p id="c_checkIn"></p>
-                    <p id="c_checkOut"></p>
-                    <p id="c_ref"></p>
-                </div>
+                <table id="c_booking">
+
+                </table>
+                <table id="housekeeping">
+                    <thead>
+                        <tr>
+                            <th>Number | </th>
+                            <th>Type | </th>
+                            <th>Status | </th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="info"></tbody>
+                </table>
+                <form action="/changestatus" method="POST">
+                </form>
+                <button type="button" onclick="getAllRooms()">All rooms</button> <br>
             </div>
 
-            <button onclick="goToBookingForm()">Telephone/In-Person Booking</button>
+            <button onclick=a href="/bookingForm">Telephone/In-Person Booking</button>
         </div>
 
 

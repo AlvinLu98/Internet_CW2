@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\styles"
+    "\\js",
+    "\\styles",
+    "\\styles\\bootstrap-4.1.2"
   ],
+  "SelectedNode": "\\Restaurant.html",
   "PreviewInSolutionExplorer": false
 }
