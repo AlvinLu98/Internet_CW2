@@ -1,36 +1,40 @@
 ﻿<html lang="en">
+
 <head>
-<title>Booking Form</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Marimar Hotel template project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
-<link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="styles/bookingform.css">
-<link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
-	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
-<!-- the lines above specify all the HTML definitions you'll need for validation -->
-	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src=""></script>
+    <title>Booking Form</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Marimar Hotel template project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
+    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
+    <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="styles/bookingform.css">
+    <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+    <!-- the lines above specify all the HTML definitions you'll need for validation -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/js/bookingform.js"></script>
 </head>
-<body>
+
+<body onload="loadBasket()">
     <header class="header">
         <div class="header_content d-flex flex-column align-items-center justify-content-lg-end justify-content-center">
 
             <!-- Logo -->
-            <div class="logo"><a href="#"><img class="logo_1" src="images/logo.png" alt=""><img class="logo_2" src="images/logo_2.png" alt=""><img class="logo_3" src="images/logo_3.png" alt=""></a></div>
+            <div class="logo">
+                <a href="#"><img class="logo_1" src="images/logo.png" alt=""><img class="logo_2" src="images/logo_2.png" alt=""><img class="logo_3" src="images/logo_3.png" alt=""></a>
+            </div>
 
             <!-- Main Nav -->
             <nav class="main_nav">
                 <ul class="d-flex flex-row align-items-center justify-content-start">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li class="active"><a href="bookingform.html">Booking Form</a></li>
-</nav>
+            </nav>
         </div>
         <div class="header_right d-flex flex-row align-items-center justify-content-start">
 
@@ -52,7 +56,9 @@
                     <form action="#" class="search_form">
                         <input type="text" class="search_input" placeholder="Type your search here" required="required">
                     </form>
-                    <div class="search_close ml-auto d-flex flex-column align-items-center justify-content-center"><div></div></div>
+                    <div class="search_close ml-auto d-flex flex-column align-items-center justify-content-center">
+                        <div></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +66,9 @@
     </header>
     <div class="logo_overlay">
         <div class="logo_overlay_content d-flex flex-column align-items-center justify-content-center">
-            <div class="logo"><a href="#"><img src="images/logo_3.png" alt=""></a></div>
+            <div class="logo">
+                <a href="#"><img src="images/logo_3.png" alt=""></a>
+            </div>
         </div>
     </div>
 
@@ -83,7 +91,7 @@
             <!-- Menu Navigation -->
             <nav class="menu_nav text-center">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                 </ul>
             </nav>
         </div>
@@ -96,13 +104,17 @@
         <div class="home">
             <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/reception.jpg" data-speed="0.8"></div>
             <div class="home_container d-flex flex-column align-items-center justify-content-center">
-                <div class="home_title"><h1>Reception</h1></div>
+                <div class="home_title">
+                    <h1>Reception</h1>
+                </div>
             </div>
         </div>
     </div>
     <!--  General -->
     <div class="mainarea">
-        <h2> Booking & contact</h2>
+        <div class="section_title">
+            <h2> Booking & contact</h2>
+        </div>
         <form id="bookingForm">
             <div class="left_half">
                 <div class="formblock">
@@ -163,59 +175,23 @@
             <!--  Details -->
             <div class="right_half">
                 <div class="formblock">
-                                       <div class="row">
-                        <div class="col-25">
-                            <label for="roomType">Room Type</label>
+                    <div class="basket">
+                        <div class="section_title">
+                            <h1> Basket </h1>
                         </div>
-                        <div class="col-75">
-                            <select size="1" id="roomType">
-                                <option value="00"></option>
-                                <option value="01">Standard Double</option>
-                                <option value="02">Deluxe Double</option>
-                                <option value="03">Standard Twin</option>
-                                <option value="04">Deluxe Twin</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="Adults">No. of Guests (Adults | Children)</label>
-                        </div>
-                        <div class="col-75">
-                            <select size="1" id="Adults">
-                                <option value="00"></option>
-                                <option value="01">1</option>
-                                <option value="02">2</option>
-                                <option value="03">3</option>
-                                <option value="04">4</option>
-                            </select>
-                            <select size="1" id="Children">
-                                <option value="00"></option>
-                                <option value="01">1</option>
-                                <option value="02">2</option>
-                                <option value="03">3</option>
-                                <option value="04">4</option>
-                            </select>
+                        <div class="basket_data">
+                            <table id="basket_table">
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="notes">Notes</label>
-                        </div>
-                        <div class="col-75">
-                            <textarea id="notes" cols="50" rows="10" placeholder="Please include any additional information, requests or comments..."></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                        </div>
-                        <div class="col-75">
-                            <input type="submit" onclick="()" value="Submit Booking" />
+                            </table>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-75">
+                        <input type="submit" action="/payment" value="Go to Payment" />
+                    </div>
+                </div>
+            </div>
         </form>
-
     </div>
 </body>

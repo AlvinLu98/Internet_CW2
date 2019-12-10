@@ -23,7 +23,7 @@ function send_post(path, data) {
         })
         .then(res => {
             res.json()
-        }).then
+        })
 
 }
 

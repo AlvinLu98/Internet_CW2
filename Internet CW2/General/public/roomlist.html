@@ -34,7 +34,7 @@
                 <!-- Main Nav -->
                 <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-center justify-content-start">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li class="active"><a href="roomlist.html">Select your room</a></li>
                     </ul>
                 </nav>
@@ -137,40 +137,44 @@
             <div class="container">
                 <div class="row row-eq-height">
                     <!-- Intro Content -->
-                    <div class="col-lg-6">
+                    <div class="details">
+                        <div class="section_title">
+                            <h1> Details </h1>
+                        </div>
+                        <div class="basket_data">
+                            <table id="details_table">
+
+                            </table>
+                            <form action="/bookingForm">
+                                <button type="submit" action="/rooms">Change</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="roomcheck_container">
                         <div class="section_title">
                             <h1>Available rooms</h1>
                         </div>
-                        <div class="roomcheck_container">
-                            <table class="tableResults" id="availableRooms">
-                                <thead>
-                                    <tr>
-                                        <th class="pic">Pictures | </th>
-                                        <th>Room | </th>
-                                        <th>Type | </th>
-                                        <th>Price | </th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="info">
-                                </tbody>
-                            </table>
-                            <div class="section_title" id="alternativeRooms">
-                            </div>
-                            <table class="tableResults">
-                                <thead>
-                                    <tr>
-                                        <th class="pic">Pictures | </th>
-                                        <th>Room | </th>
-                                        <th>Type | </th>
-                                        <th>Price | </th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="altInfo">
-                                </tbody>
-                            </table>
+                        <table class="tableResults" id="availableRooms">
+                            <thead>
+                                <tr>
+                                    <th class="pic">Pictures | </th>
+                                    <th>Room | </th>
+                                    <th>Type | </th>
+                                    <th>Price | </th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                            <tbody id="info">
+                            </tbody>
+                        </table>
+                        <div class="section_title" id="alternativeRooms">
                         </div>
+                        <table class="tableResults">
+                            <thead id="altInfoHead">
+                            </thead>
+                            <tbody id="altInfo">
+                            </tbody>
+                        </table>
                     </div>
                     <div class="basket">
                         <div class="section_title">
@@ -181,12 +185,15 @@
 
                             </table>
                         </div>
+                        <form id="goToCheckOut" action="/bookingForm">
+                            <button type="submit" action="/bookingForm">Go to Checkout</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/roomlist.js"></script>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js "></script>
+    <script src="js/custom.js "></script>
+    <script src="js/roomlist.js "></script>
 </body>
