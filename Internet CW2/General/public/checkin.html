@@ -168,15 +168,23 @@
 
 
             <div class="right_half">
-                <div class="Custimer details" id="c_details">
-                    <p id="c_name"> </p>
-                    <p id="c_checkIn"></p>
-                    <p id="c_checkOut"></p>
-                    <p id="c_ref"></p>
-                </div>
+                <table id="housekeeping">
+                    <thead>
+                        <tr>
+                            <th>Number | </th>
+                            <th>Type | </th>
+                            <th>Status | </th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="info"></tbody>
+                </table>
+                <form action="/changestatus" method="POST">
+                </form>
+                <button type="button" onclick="getAllRooms()">All rooms</button> <br>
             </div>
 
-            <button onclick="goToBookingForm()">Telephone/In-Person Booking</button>
+            <button onclick="/bookingform">Telephone/In-Person Booking</button>
         </div>
 
 

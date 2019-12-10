@@ -57,8 +57,8 @@ app.get('/rooms', (req, res) => {
     res.sendFile(path.join(dir + '/rooms.html'));
 })
 
-app.get('/blog', (req, res) => {
-    res.sendFile(path.join(dir + '/blog.html'));
+app.get('/restaurant', (req, res) => {
+    res.sendFile(path.join(dir + '/Restaurant.html'));
 })
 
 app.get('/contact', (req, res) => {
@@ -85,8 +85,16 @@ app.get('/bookingForm', (req, res) => {
     res.sendFile(path.join(dir + '/bookingform.html'))
 })
 
-app.get('/payment', (req, res) => {
-    res.sendFile(path.join(dir + '/bookingform.html'))
+app.get('/paymentForm', (req, res) => {
+    res.sendFile(path.join(dir + '/roomlist.html'));
+})
+
+app.get('/gym', (req, res) => {
+    res.sendFile(path.join(dir + '/Gym.html'));
+})
+
+app.get('/meetingRooms', (req, res) => {
+    res.sendFile(path.join(dir + '/meetingrooms.html'));
 })
 
 app.get('/confirmation', (req, res) => {
@@ -273,6 +281,11 @@ app.post('/completeBooking', jsonParser, async(req, res) => {
             })
         })
     })
+})
+app.get('/checkIn', (req, res) => {
+    checkIn(C, data.b_ref).then(data => {
+        return res.send(data);
+    });
 })
 
 //----------------------------------- Database setup -----------------------------------

@@ -108,15 +108,21 @@ function getbookingName() {
     send_post('getBookingByName', data)
 }
 
+function getAllRooms() {
+    fetch('allRooms').then(onSuccess, onError).then(onStreamProcessed);
+}
+
 function checkIn() {
-    fetch('checkIn()').then(onSuccess, onError).then(onStreamProcessed);
+    console.log('Checking in - Error Testing');
+    fetch('checkIn').then(onSuccess, onError).then(onStreamProcessed);
+    window.alert("Check In Complete");
 }
 
 function checkOut() {
     if (val.key.localeCompare(item[$.bref]) == 0) {
-        fetch('checkOut($(#bref)').then(onSuccess, onError).then(onStreamProcessed);
+        fetch('checkOut').then(onSuccess, onError).then(onStreamProcessed);
     } else {
-        fetch('checkOutByRoom($(#codate)').then(onSuccess, onError).then(onStreamProcessed);
+        fetch('checkOutByRoom').then(onSuccess, onError).then(onStreamProcessed);
     }
 }
 
