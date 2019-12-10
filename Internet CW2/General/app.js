@@ -223,6 +223,11 @@ app.post('/goToPayment', jsonParser, async(req, res) => {
     res.sendFile(path.join(dir + '/payment.html'))
 
 })
+app.get('/checkIn', (req, res) => {
+    checkIn(C,data.b_ref).then(data => {
+        return res.send(data);
+    });
+})
 
 //----------------------------------- Database setup -----------------------------------
 
