@@ -112,6 +112,19 @@
     </div>
     <!--  General -->
     <div class="mainarea">
+        <div class="details">
+            <div class="section_title">
+                <h1> Details </h1>
+            </div>
+            <div class="basket_data">
+                <table id="details_table">
+
+                </table>
+                <form action="/bookingForm">
+                    <button type="submit" action="/rooms">Change</button>
+                </form>
+            </div>
+        </div>
         <div class="section_title">
             <h2> Booking & contact</h2>
         </div>
@@ -150,24 +163,8 @@
                             <input type="text" id="hono" placeholder="House Name or Number">
                             <input type="text" id="street" placeholder="Street Name">
                             <input type="text" id="city" placeholder="City">
-                            <input type="text" id="city" placeholder="Country">
-                            <input type="text" id="city" placeholder="Post Code">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="cidate">Check In Date</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="date" id="cidate">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="codate">Check Out Date</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="date" id="codate">
+                            <input type="text" id="country" placeholder="Country">
+                            <input type="text" id="postcode" placeholder="Post Code">
                         </div>
                     </div>
                 </div>
@@ -188,7 +185,7 @@
                 </div>
                 <div class="row">
                     <div class="col-75">
-                        <input type="submit" action="/payment" value="Go to Payment" />
+                        <input type="submit" onclick="goToPayment()" value="Go to Payment" />
                     </div>
                 </div>
             </div>
