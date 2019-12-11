@@ -765,7 +765,6 @@ section {
     text-align: center;
     background: #ffffff;
     width: 80%;
-    height: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 300px;
@@ -924,6 +923,14 @@ input[type=submit]:hover {
     padding: 5px;
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+#existingCust {
+    margin-bottom: 10px;
+}
+
+#bookingForm {
+    margin-bottom: 10px;
 }
 
 

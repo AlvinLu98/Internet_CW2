@@ -228,6 +228,27 @@ app.get('/basketData', (req, res) => {
 
 
 //--------------------------- Completing purchase functions --------------------------------
+app.post('/findCust', jsonParser, (req, res) => {
+    data = req.body;
+    customerDetails(data.name, data.email).then(c => {
+        cust = JSON.parse(c);
+        if (cust.length > 0) {
+            const data = {};
+            data.name = cust[0].c_name;
+            data.email = cust[0].c_email;
+            data.address = cust[0].c_address;
+            req.session.customer = data;
+            res.send({ "result": true });
+        } else {
+            res.status(200).send({ "result": false });
+        }
+    })
+})
+
+app.get('/goToPaymentg', async(req, res) => {
+    res.sendFile(path.join(dir + '/paymentform.html'))
+})
+
 app.post('/goToPayment', jsonParser, async(req, res) => {
     const data = {};
     data.name = req.body.name;
@@ -532,21 +553,6 @@ async function getAvailableRooms(checkIn, checkOut, roomType) {
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
     // console.log(json)
-    return json_str_new
-}
-
-async function bookRoomExistingCustomer(b_ref, customer_name, email, checkIn, checkOut, roomNo) {
-    client = await setUpDatabase();
-
-    query = 'INSERT INTO roombooking '
-    var values = [checkIn, checkOut, roomType];
-    const res1 = await client.query(query, values);
-
-    await client.end();
-
-    json = res1.rows;
-    var json_str_new = JSON.stringify(json);
-    // console.log(json);
     return json_str_new
 }
 

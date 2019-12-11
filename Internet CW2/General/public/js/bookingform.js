@@ -32,3 +32,24 @@ function onStreamProcessed(text) {
         $('#basket_table').append(row);
     })
 }
+
+function findCust() {
+    data = {};
+    data.name = $('#name').val();
+    data.email = $('#email').val();
+    fetch("findCust", {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        if (res.status === 200) {
+            alert("Customer not found!")
+            return false;
+        } else {
+            return true;
+        }
+    })
+
+}

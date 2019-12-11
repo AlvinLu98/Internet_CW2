@@ -125,18 +125,18 @@
                 </form>
             </div>
         </div>
-        <div class="section_title">
-            <h2> Booking & contact</h2>
-        </div>
-        <form id="bookingForm" action="/goToPayment" method="POST">
+        <div id="b_Forms">
             <div class="left_half">
-                <div class="formblock">
+                <div class="section_title">
+                    <h2> Existing customer</h2>
+                </div>
+                <form id="existingCust" onsubmit="return findCust()" action="/goToPaymentg">
                     <div class="row">
                         <div class="col-25">
                             <label for="name">Name</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="name" size="25" placeholder="Enter customer name here">
+                            <input type="text" id="name" name="name" size="25" placeholder="Enter customer name here">
                         </div>
                     </div>
                     <div class="row">
@@ -144,51 +144,79 @@
                             <label for="email">Email</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="email" size="25" placeholder="Enter E-mail address here">
+                            <input type="text" id="email" name="email" size="25" placeholder="Enter E-mail address here">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-25">
-                            <label for="phone">Phone</label>
-                        </div>
                         <div class="col-75">
-                            <input type="tel" name="phone">
+                            <input type="submit" value="Go to Payment" />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="hono">Address</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" name="hono" placeholder="House Name or Number">
-                            <input type="text" name="street" placeholder="Street Name">
-                            <input type="text" name="city" placeholder="City">
-                            <input type="text" name="country" placeholder="Country">
-                            <input type="text" name="postcode" placeholder="Post Code">
-                        </div>
-                    </div>
+                </form>
+                <div class="section_title">
+                    <h2> New Customer</h2>
                 </div>
-            </div>
-            <!--  Details -->
-            <div class="right_half">
-                <div class="formblock">
-                    <div class="basket">
-                        <div class="section_title">
-                            <h1> Basket </h1>
+                <form id="bookingForm" action="/goToPayment" method="POST">
+                    <div class="formblock">
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="name">Name</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" name="name" size="25" placeholder="Enter customer name here">
+                            </div>
                         </div>
-                        <div class="basket_data">
-                            <table id="basket_table">
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" name="email" size="25" placeholder="Enter E-mail address here">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="phone">Phone</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="tel" name="phone">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="hono">Address</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" name="hono" placeholder="House Name or Number">
+                                <input type="text" name="street" placeholder="Street Name">
+                                <input type="text" name="city" placeholder="City">
+                                <input type="text" name="country" placeholder="Country">
+                                <input type="text" name="postcode" placeholder="Post Code">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-75">
+                                <input type="submit" value="Go to Payment" />
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+        <!--  Details -->
+        <div class="right_half">
+            <div class="formblock">
+                <div class="basket">
+                    <div class="section_title">
+                        <h1> Basket </h1>
+                    </div>
+                    <div class="basket_data">
+                        <table id="basket_table">
 
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-75">
-                        <input type="submit" value="Go to Payment" />
+                        </table>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </body>
