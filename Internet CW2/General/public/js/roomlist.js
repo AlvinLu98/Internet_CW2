@@ -139,7 +139,6 @@ function addToList(element) {
     var row = $('#details_table tr').find('td:eq(0):contains(Number of rooms: )').parent();
     var rooms = row[0].cells[1].innerHTML;
     var curRooms = $('#basket_table tr').length;
-    console.log(curRooms)
     if (rooms > curRooms) {
         element.style.display = 'none'
         row = element.closest('tr');
@@ -168,4 +167,16 @@ function deleteFromBasket(element) {
         "Add to cart </button></td></tr>";
 
     send_post('removeFromBasket', data);
+}
+
+function checkout() {
+    var row = $('#details_table tr').find('td:eq(0):contains(Number of rooms: )').parent();
+    var rooms = row[0].cells[1].innerHTML;
+    var curRooms = $('#basket_table tr').length;
+    if (rooms == curRooms) {
+        return true;
+    } else {
+        alert("Please select " + (rooms - curRooms) + " more rooms!")
+        return false;
+    }
 }

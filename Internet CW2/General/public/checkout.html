@@ -12,11 +12,12 @@
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
     <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="styles/Reception.css">
+    <link rel="stylesheet" type="text/css" href="styles/checkin.css">
     <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
     <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
     <!-- the lines above specify all the HTML definitions you'll need for validation -->
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/custom.js"></script>
     <script src="js/reception.js"></script>
 </head>
 
@@ -36,6 +37,7 @@
                         <li><a href="/">Home</a></li>
                         <li><a href="/checkInReception">Check in</a></li>
                         <li class="active"><a href="/checkOutReception">Check out</a></li>
+                        <li><a href="/report">Reports</a></li>
                     </ul>
                 </nav>
             </div>
@@ -94,7 +96,10 @@
                 <!-- Menu Navigation -->
                 <nav class="menu_nav text-center">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li class="active"><a href="/checkInReception">Check in</a></li>
+                        <li><a href="/checkOutReception">Check out</a></li>
+                        <li><a href="/report">Reports</a></li>
                     </ul>
                 </nav>
             </div>
@@ -112,20 +117,20 @@
             <!-- Intro Content -->
             <div class="left_half">
                 <div class="section_title">
-                    <h1> Retrieve by reference</h1>
+                    <h1> Retrieve by room</h1>
                 </div>
                 <form id="FindBookingByRef">
                     <div class="row">
                         <div class="col-25">
-                            <label for="bRef">Booking Reference</label>
+                            <label for="bRef">Room no</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="b_ref" size="40" placeholder="Enter booking reference here">
+                            <input type="text" id="roomNo" size="40" placeholder="Enter room number here">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-75">
-                            <input type="submit" onclick="getbookingRef()" value="Find Booking" />
+                            <input type="button" onclick="getbookingRoom()" value="Find Booking" />
                         </div>
                     </div>
                 </form>
@@ -139,6 +144,14 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="cName" size="25" placeholder="Enter customer name here">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="cname">Email</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="email" size="25" placeholder="Enter customer email here">
                         </div>
                     </div>
                     <div class="row">
@@ -159,8 +172,7 @@
                     </div>
                     <div class="row">
                         <div class="col-75">
-                            <input type="submit" onclick="getbookingName()" value="Find Booking" />
-                            <input type="submit" onclick="checkOut()" value="Check In" />
+                            <input type="button" onclick="getbookingNameCO()" value="Find Booking" />
                         </div>
                     </div>
                 </form>
@@ -168,12 +180,30 @@
 
 
             <div class="right_half">
-                <div class="Custimer details" id="c_details">
-                    <p id="c_name"> </p>
-                    <p id="c_checkIn"></p>
-                    <p id="c_checkOut"></p>
-                    <p id="c_ref"></p>
+                <div id="b_data">
+                    <div id="c_booking_title">
+
+                    </div>
+                    <table id="c_booking" class="c_booking">
+
+                    </table>
+                    <div id="room_container">
+                        <div id="room_container_title">
+
+                        </div>
+                        <table id="c_rooms" class="c_booking">
+
+                        </table>
+                    </div>
+                    <div id="c_button">
+
+                    </div>
                 </div>
+                <div id="allRoom">
+
+                </div>
+                <input type="button" onclick="getAllRooms()" value="All rooms"></input> <br>
             </div>
+
         </div>
 </body>
