@@ -69,7 +69,7 @@ function getBookingData(data) {
             "<td>" + room.r_notes + "</td></tr>";
         $('#c_rooms').append(row)
     })
-    $('#c_button').append('<input type="submit" onclick="cancelBooking()" value="Cancel" />');
+    $('#c_button').append('<input type="button" onclick="cancelBooking()" value="Cancel" />');
 }
 
 function getbookingRef() {
@@ -84,4 +84,29 @@ function getbookingName() {
 
 function getAllRooms() {
     fetch('allRooms').then(onSuccess, onError).then(onStreamProcessed);
+}
+
+function cancelBooking() {
+    var row = $('#c_booking tr').find('td:eq(0):contains(Booking ref: )').parent();
+    const b_ref = row[0].cells[1].innerHTML
+    data = {}
+    data.b_ref = b_ref;
+    console.log(data)
+    send_post_cancel('cancelBooking', data);
+}
+
+function send_post_cancel(path, data) {
+    fetch(path, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(_ => {
+        $('#c_booking_title').empty()
+        $('#c_booking_title').append("<h4>Cancelled</h4>")
+        $('#c_booking').empty()
+        $('#room_container_title').empty()
+        $('#c_rooms').empty()
+    })
 }

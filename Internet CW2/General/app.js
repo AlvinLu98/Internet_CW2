@@ -41,14 +41,41 @@ app.use(session({
     }
 }))
 
-app.listen(8000, () => {
-    console.log('Routed app listening to port 8000!');
+app.listen(8104, '0.0.0.0', () => {
+    console.log('Routed app listening to port 8104!');
 })
 
 //----------------------------------- Link functions -----------------------------------
 app.get('/', (req, res) => {
     res.clearCookie();
     res.sendFile(path.join(dir + '/index.html'));
+})
+
+app.get('/contact', (req, res) => {
+    res.clearCookie();
+    res.sendFile(path.join(dir + '/contact.html'));
+})
+
+app.get('/news', (req, res) => {
+    res.clearCookie();
+    res.sendFile(path.join(dir + '/blog.html'));
+})
+
+//---------------------------------------- Facilities --------------------------------------
+
+app.get('/gym', (req, res) => {
+    res.clearCookie();
+    res.sendFile(path.join(dir + '/Gym.html'));
+})
+
+app.get('/meetingRooms', (req, res) => {
+    res.clearCookie();
+    res.sendFile(path.join(dir + '/meetingrooms.html'));
+})
+
+app.get('/restaurant', (req, res) => {
+    res.clearCookie();
+    res.sendFile(path.join(dir + '/Restaurant.html'));
 })
 
 app.get('/about', (req, res) => {
@@ -61,40 +88,9 @@ app.get('/rooms', (req, res) => {
     res.sendFile(path.join(dir + '/rooms.html'));
 })
 
-app.get('/report', (req, res) => {
-    res.sendFile(path.join(dir + '/report.html'));
-})
-
-app.get('/modify', (req, res) => {
-    res.clearCookie();
-    res.sendFile(path.join(dir + '/modifybooking.html'));
-})
-
-app.get('/restaurant', (req, res) => {
-    res.clearCookie();
-    res.sendFile(path.join(dir + '/Restaurant.html'));
-})
-
-app.get('/contact', (req, res) => {
-    res.clearCookie();
-    res.sendFile(path.join(dir + '/contact.html'));
-})
-
-app.get('/housekeeping', (req, res) => {
-    res.clearCookie();
-    res.sendFile(path.join(dir + '/housekeeping.html'));
-})
-
+//---------------------------------------- Room booking ------------------------------------
 app.get('/roomList', (req, res) => {
     res.sendFile(path.join(dir + '/roomlist.html'));
-})
-
-app.get('/checkInReception', (req, res) => {
-    res.sendFile(path.join(dir + '/checkin.html'));
-})
-
-app.get('/checkOutReception', (req, res) => {
-    res.sendFile(path.join(dir + '/checkout.html'));
 })
 
 app.get('/bookingForm', (req, res) => {
@@ -105,46 +101,34 @@ app.get('/paymentForm', (req, res) => {
     res.sendFile(path.join(dir + '/paymentform.html'));
 })
 
-app.get('/gym', (req, res) => {
-    res.clearCookie();
-    res.sendFile(path.join(dir + '/Gym.html'));
-})
-
-app.get('/meetingRooms', (req, res) => {
-    res.clearCookie();
-    res.sendFile(path.join(dir + '/meetingrooms.html'));
-})
-
 app.get('/confirmation', (req, res) => {
     res.sendFile(path.join(dir + '/bookingconfirmation.html'))
 })
 
-//--------------------------------- Database functions ---------------------------------
-app.get('/allRooms', (req, res) => {
-    getAllRooms().then(data => {
-        res.send(data);
-    });
+app.get('/modify', (req, res) => {
+    res.clearCookie();
+    res.sendFile(path.join(dir + '/modifybooking.html'));
 })
 
-app.get('/checkedOut', (req, res) => {
-    getCheckedOutRooms().then(data => {
-        return res.send(data);
-    });
+//---------------------------------------- Staff ---------------------------------------
+app.get('/checkInReception', (req, res) => {
+    res.sendFile(path.join(dir + '/checkin.html'));
 })
 
-app.post('/changeStatus', jsonParser, async(req, res) => {
-    const data = req.body;
-    const loop = async _ => {
-        for (var i in data) {
-            changeStatus(data[i].r_status, data[i].r_no);
-        }
-    }
-    loop().then(_ => {
-        res.redirect('/housekeeping');
-    })
+app.get('/checkOutReception', (req, res) => {
+    res.sendFile(path.join(dir + '/checkout.html'));
 })
 
+app.get('/report', (req, res) => {
+    res.sendFile(path.join(dir + '/report.html'));
+})
 
+app.get('/housekeeping', (req, res) => {
+    res.clearCookie();
+    res.sendFile(path.join(dir + '/housekeeping.html'));
+})
+
+//--------------------------------- Listing room functions ---------------------------------
 app.post('/getAvailableRooms', jsonParser, async(req, res) => {
     const checkInDate = req.body.b_checkIn;
     const checkOutDate = req.body.b_checkOut;
@@ -199,6 +183,7 @@ app.get('/listAvailableRooms', (req, res) => {
     })
 })
 
+//--------------------------------- Selecting room functions --------------------------------
 app.get('/getBookingDetails', (req, res) => {
     sess = req.session
     var data = {};
@@ -241,67 +226,8 @@ app.get('/basketData', (req, res) => {
     res.send(data)
 })
 
-app.post('/getBookingByRef', jsonParser, async(req, res) => {
-    const data = req.body
-    booking = {}
-    b_room = []
-    getBookingByRef(data.b_ref).then(cust => {
-        booking.cust = JSON.parse(cust)
-        getRoomsByRef(data.b_ref).then(async rooms => {
-            const loop = async _ => {
-                r = JSON.parse(rooms)
-                for (var i in r) {
-                    room = JSON.parse(await getRoom(r[i].r_no));
-                    b_room.push(room[0]);
-                }
-            }
-            await loop().then(_ => {
-                booking.rooms = b_room
-            })
-        }).then(_ => {
-            viewPayments(booking.cust[0].c_name, data.email, booking.cust[0].checkout).then(c_det => {
-                booking.details = JSON.parse(c_det);
-                res.send(booking);
-            })
-        })
-    })
-})
 
-app.post('/getBookingByRoom', jsonParser, async(req, res) => {
-    const data = req.body
-    getRoom(data.r_no).then(room => {
-        data.room = room
-        res.send(data);
-    })
-})
-
-app.post('/getBookingByName', jsonParser, async(req, res) => {
-    const data = req.body
-    booking = {}
-    b_room = []
-    getBookingByName(data.custName, data.checkIn, data.checkOut).then(cust => {
-        booking.cust = JSON.parse(cust)
-        getRoomsByRef(booking.cust[0].b_ref).then(async rooms => {
-            const loop = async _ => {
-                r = JSON.parse(rooms)
-                for (var i in r) {
-                    room = JSON.parse(await getRoom(r[i].r_no));
-                    b_room.push(room[0]);
-                }
-            }
-            await loop().then(_ => {
-                booking.rooms = b_room
-            })
-        }).then(_ => {
-            viewPayments(data.custName, data.email, data.checkOut).then(c_det => {
-                booking.details = JSON.parse(c_det);
-                console.log(booking)
-                res.send(booking);
-            })
-        })
-    })
-})
-
+//--------------------------- Completing purchase functions --------------------------------
 app.post('/goToPayment', jsonParser, async(req, res) => {
     const data = {};
     data.name = req.body.name;
@@ -369,6 +295,106 @@ app.get('/confirmationDetails', (req, res) => {
     res.send(data)
 })
 
+//--------------------------- Modifying purchase functions ---------------------------------
+app.post('/cancelBooking', jsonParser, async(req, res) => {
+    const data = req.body;
+    cancelBooking(data.b_ref);
+    res.send("Successfully cancelled")
+})
+
+//--------------------------------- Housekeeping functions ---------------------------------
+app.get('/allRooms', (req, res) => {
+    getAllRooms().then(data => {
+        res.send(data);
+    });
+})
+
+app.get('/checkedOut', (req, res) => {
+    getCheckedOutRooms().then(data => {
+        return res.send(data);
+    });
+})
+
+app.post('/changeStatus', jsonParser, async(req, res) => {
+    const data = req.body;
+    const loop = async _ => {
+        for (var i in data) {
+            changeStatus(data[i].r_status, data[i].r_no);
+        }
+    }
+    loop().then(_ => {
+        res.redirect('/housekeeping');
+    })
+})
+
+//------------------------------- Reception accessor functions ------------------------------
+
+app.post('/getBookingByRef', jsonParser, async(req, res) => {
+    const data = req.body
+    booking = {}
+    b_room = []
+    getBookingByRef(data.b_ref).then(cust => {
+        booking.cust = JSON.parse(cust)
+        getRoomsByRef(data.b_ref).then(async rooms => {
+            const loop = async _ => {
+                r = JSON.parse(rooms)
+                for (var i in r) {
+                    room = JSON.parse(await getRoom(r[i].r_no));
+                    b_room.push(room[0]);
+                }
+            }
+            await loop().then(_ => {
+                booking.rooms = b_room
+            })
+        }).then(_ => {
+            viewPayments(booking.cust[0].c_name, data.email, booking.cust[0].checkout)
+                .then(c_det => {
+                    booking.details = JSON.parse(c_det);
+                    res.send(booking);
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        })
+    })
+})
+
+app.post('/getBookingByRoom', jsonParser, async(req, res) => {
+    const data = req.body
+    getRoom(data.r_no).then(room => {
+        data.room = room
+        res.send(data);
+    })
+})
+
+app.post('/getBookingByName', jsonParser, async(req, res) => {
+    const data = req.body
+    booking = {}
+    b_room = []
+    getBookingByName(data.custName, data.checkIn, data.checkOut).then(cust => {
+        booking.cust = JSON.parse(cust)
+        getRoomsByRef(booking.cust[0].b_ref).then(async rooms => {
+            const loop = async _ => {
+                r = JSON.parse(rooms)
+                for (var i in r) {
+                    room = JSON.parse(await getRoom(r[i].r_no));
+                    b_room.push(room[0]);
+                }
+            }
+            await loop().then(_ => {
+                booking.rooms = b_room
+            })
+        }).then(_ => {
+            viewPayments(data.custName, data.email, data.checkOut).then(c_det => {
+                booking.details = JSON.parse(c_det);
+                console.log(booking)
+                res.send(booking);
+            })
+        })
+    })
+})
+
+//--------------------------------- Check in/out functions ---------------------------------
 app.post('/checkIn', jsonParser, (req, res) => {
     data = req.body
     const loop = async _ => {
@@ -393,6 +419,7 @@ app.post('/checkOutRoom', jsonParser, (req, res) => {
     changeStatus('C', data.r_no)
 })
 
+//------------------------------------- Report functions ------------------------------------
 app.post('/salesdata', jsonParser, (req, res) => {
     data = req.body;
     getSales(data.start, data.end).then(sales => {
@@ -570,8 +597,6 @@ async function getBookingRef(c_no, cost) {
     return json_str_new
 }
 
-
-
 async function createRoomBookings(r_no, b_ref, checkIn, checkOut) {
     client = await setUpDatabase();
 
@@ -593,6 +618,25 @@ async function customerDetails(customer_name, email) {
     query = 'SELECT * FROM customer WHERE c_name = $1 AND c_email = $2'
     var values = [customer_name, email];
     const res1 = await client.query(query, values);
+
+    await client.end();
+
+    json = res1.rows;
+    var json_str_new = JSON.stringify(json);
+    // console.log(json);
+    return json_str_new
+}
+
+async function cancelBooking(b_ref) {
+    client = await setUpDatabase();
+
+    query = 'DELETE FROM roombooking WHERE b_ref=$1'
+    var values = [b_ref];
+    var res1 = await client.query(query, values).then(_ => {
+        query = 'DELETE FROM booking WHERE b_ref=$1'
+        var values = [b_ref];
+        client.query(query, values)
+    })
 
     await client.end();
 
@@ -633,7 +677,7 @@ async function getBookingByRef(bookingRef) {
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    // console.log(json);
+    console.log(json);
     return json_str_new
 }
 
