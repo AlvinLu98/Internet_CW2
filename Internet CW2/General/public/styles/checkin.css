@@ -808,7 +808,7 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
     width: 25%;
-    height: 5%;
+    height: 10%;
 }
 
 input[type=button] {
@@ -821,13 +821,10 @@ input[type=button] {
     border-radius: 4px;
     cursor: pointer;
     width: 25%;
-    height: 5%;
+    height: 10%;
 }
 
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-
+input[type=submit]:hover,
 input[type=button]:hover {
     background-color: #45a049;
 }
@@ -840,6 +837,10 @@ input[type=button]:hover {
 
 #allRoom {
     margin-bottom: 10px;
+}
+
+#all_room_table {
+    width: 60%;
 }
 
 #all_room_table {
@@ -877,11 +878,41 @@ input[type=button]:hover {
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 
 @media screen and (max-width: 600px) {
-    .col-25,
-    .col-75,
-    input[type=submit] {
+    .formblock {
+        background: #ffffff;
+        padding-top: 100px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-align: center;
+        background: #ffffff;
         width: 100%;
-        margin-top: 0;
+        height: 100%;
+        margin: 0 auto;
+    }
+    .section_title {
+        margin-bottom: 5vh;
+        margin-top: 15px;
+    }
+    .left_half,
+    .right_half {
+        float: none;
+        text-align: left;
+        margin-left: 10px;
+        width: 90vw;
+    }
+    input[type=button],
+    input[type=submit] {
+        float: none;
+        width: 50vw;
+    }
+    input[type=text],
+    input[type=date] {
+        width: 65vw;
+    }
+    #all_room_table {
+        margin: 0px 0px 0px 0px;
+        width: 90%;
     }
 }
 

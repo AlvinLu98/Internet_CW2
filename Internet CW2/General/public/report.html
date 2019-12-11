@@ -1,7 +1,7 @@
-﻿<html lang="en">
+<html lang="en">
 
 <head>
-    <title>Reception</title>
+    <title>Report</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Marimar Hotel template project">
@@ -12,13 +12,13 @@
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
     <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="styles/checkin.css">
+    <link rel="stylesheet" type="text/css" href="styles/report.css">
     <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
     <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
     <!-- the lines above specify all the HTML definitions you'll need for validation -->
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="js/custom.js"></script>
-    <script src="js/reception.js"></script>
+    <script src="js/report.js"></script>
 </head>
 
 <body>
@@ -35,9 +35,9 @@
                 <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-center justify-content-start">
                         <li><a href="/">Home</a></li>
-                        <li class="active"><a href="/checkInReception">Check in</a></li>
+                        <li><a href="/checkInReception">Check in</a></li>
                         <li><a href="/checkOutReception">Check out</a></li>
-                        <li><a href="/report">Reports</a></li>
+                        <li class="active"><a href="/report">Reports</a></li>
                     </ul>
                 </nav>
             </div>
@@ -97,9 +97,9 @@
                 <nav class="menu_nav text-center">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li class="active"><a href="/checkInReception">Check in</a></li>
+                        <li><a href="/checkInReception">Check in</a></li>
                         <li><a href="/checkOutReception">Check out</a></li>
-                        <li><a href="/report">Reports</a></li>
+                        <li class="active"><a href="/report">Reports</a></li>
                     </ul>
                 </nav>
             </div>
@@ -117,110 +117,67 @@
             <!-- Intro Content -->
             <div class="left_half">
                 <div class="section_title">
-                    <h1> Retrieve by reference</h1>
+                    <h1> Get sales data</h1>
                 </div>
-                <form id="FindBookingByRef">
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="bRef">Booking Reference</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="b_ref" size="40" placeholder="Enter booking reference here">
-                        </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="cname">Start date</label>
                     </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="cname">Email</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="r_email" size="25" placeholder="Enter customer email here">
-                        </div>
+                    <div class="col-75">
+                        <input type="date" id="sDate">
                     </div>
-                    <div class="row">
-                        <div class="col-75">
-                            <input type="button" onclick="getbookingRef()" value="Find Booking" />
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="cname">End date</label>
                     </div>
-                </form>
+                    <div class="col-75">
+                        <input type="date" id="eDate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <input type="button" onclick="getSalesData()" value="Get sales data" />
+                        <input type="button" onclick="getIncomeData()" value="Get income data" />
+                    </div>
+                </div>
                 <div class="section_title">
-                    <h1> Retrieve by name</h1>
+                    <h1>Available rooms</h1>
                 </div>
-                <form id="FindBookingByName">
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="cname">Customer Name</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="cName" size="25" placeholder="Enter customer name here">
-                        </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="cname">Start date</label>
                     </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="cname">Email</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="email" size="25" placeholder="Enter customer email here">
-                        </div>
+                    <div class="col-75">
+                        <input type="date" id="r_sDate">
                     </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="cidate">Check In Date</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="date" id="cidate">
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="cname">End date</label>
                     </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="codate">Check Out Date</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="date" id="codate">
-                        </div>
+                    <div class="col-75">
+                        <input type="date" id="r_eDate">
                     </div>
-                    <div class="row">
-                        <div class="col-75">
-                            <input type="button" onclick="getbookingNameCI()" value="Find Booking" />
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <input type="button" onclick="occupied()" value="Occupied Room" />
+                        <input type="button" onclick="unoccupied()" value="Unoccupied Room" />
                     </div>
-                </form>
+                </div>
             </div>
 
 
             <div class="right_half">
-                <div id="b_data">
-                    <div id="c_booking_title">
-
-                    </div>
-                    <table id="c_booking" class="c_booking">
+                <div class="section_title">
+                    <h1>Reports</h1>
+                </div>
+                <div id="allRooms">
+                    <table id='sales_table'>
 
                     </table>
-                    <div id="room_container">
-                        <div id="room_container_title">
-
-                        </div>
-                        <table id="c_rooms" class="c_booking">
-
-                        </table>
-                    </div>
-                    <div id="c_button">
-
-                    </div>
                 </div>
-                <div id="allRoom">
 
-                </div>
-                <div id="change_room">
-
-                </div>
-                <div class="row">
-                    <div class="col-75">
-                        <input type="button" onclick="getAllRooms()" value="All rooms"></input> <br>
-                    </div>
-                </div>
             </div>
-        </div>
-
-
-
 </body>

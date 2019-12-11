@@ -47,26 +47,41 @@ app.listen(8000, () => {
 
 //----------------------------------- Link functions -----------------------------------
 app.get('/', (req, res) => {
+    res.clearCookie();
     res.sendFile(path.join(dir + '/index.html'));
 })
 
 app.get('/about', (req, res) => {
+    res.clearCookie();
     res.sendFile(path.join(dir + '/about.html'));
 })
 
 app.get('/rooms', (req, res) => {
+    res.clearCookie();
     res.sendFile(path.join(dir + '/rooms.html'));
 })
 
+app.get('/report', (req, res) => {
+    res.sendFile(path.join(dir + '/report.html'));
+})
+
+app.get('/modify', (req, res) => {
+    res.clearCookie();
+    res.sendFile(path.join(dir + '/modifybooking.html'));
+})
+
 app.get('/restaurant', (req, res) => {
+    res.clearCookie();
     res.sendFile(path.join(dir + '/Restaurant.html'));
 })
 
 app.get('/contact', (req, res) => {
+    res.clearCookie();
     res.sendFile(path.join(dir + '/contact.html'));
 })
 
 app.get('/housekeeping', (req, res) => {
+    res.clearCookie();
     res.sendFile(path.join(dir + '/housekeeping.html'));
 })
 
@@ -87,14 +102,16 @@ app.get('/bookingForm', (req, res) => {
 })
 
 app.get('/paymentForm', (req, res) => {
-    res.sendFile(path.join(dir + '/roomlist.html'));
+    res.sendFile(path.join(dir + '/paymentform.html'));
 })
 
 app.get('/gym', (req, res) => {
+    res.clearCookie();
     res.sendFile(path.join(dir + '/Gym.html'));
 })
 
 app.get('/meetingRooms', (req, res) => {
+    res.clearCookie();
     res.sendFile(path.join(dir + '/meetingrooms.html'));
 })
 
@@ -348,6 +365,7 @@ app.get('/confirmationDetails', (req, res) => {
     data.basket = s.basket;
     data.numrooms = s.numrooms
     data.total = s.total;
+    res.clearCookie();
     res.send(data)
 })
 
@@ -373,6 +391,34 @@ app.post('/checkOut', jsonParser, (req, res) => {
 app.post('/checkOutRoom', jsonParser, (req, res) => {
     data = req.body;
     changeStatus('C', data.r_no)
+})
+
+app.post('/salesdata', jsonParser, (req, res) => {
+    data = req.body;
+    getSales(data.start, data.end).then(sales => {
+        res.send(sales);
+    })
+})
+
+app.post('/incomedata', jsonParser, (req, res) => {
+    data = req.body;
+    getIncome(data.start, data.end).then(sales => {
+        res.send(sales);
+    })
+})
+
+app.post('/occupied', jsonParser, (req, res) => {
+    data = req.body;
+    occupied(data.start, data.end).then(rooms => {
+        res.send(rooms);
+    })
+})
+
+app.post('/unoccupied', jsonParser, (req, res) => {
+    data = req.body;
+    unoccupied(data.start, data.end).then(rooms => {
+        res.send(rooms);
+    })
 })
 
 //----------------------------------- Database setup -----------------------------------
@@ -690,6 +736,79 @@ async function viewPayments(customer_name, customer_email, checkOut) {
     var json_str_new = JSON.stringify(json);
     // console.log(json_str_new);
     return json_str_new
+}
+
+async function getSales(start, end) {
+    client = await setUpDatabase();
+
+    var query = 'SELECT * from booking LEFT JOIN roombooking ON booking.b_ref = roombooking.b_ref ' +
+        'WHERE roombooking.checkin >= $1 AND roombooking.checkout <= $2';
+    var values = [start, end]
+    const res1 = await client.query(query, values);
+
+    await client.end();
+
+    json = res1.rows;
+    var json_str_new = JSON.stringify(json);
+    // console.log(json);
+    return json_str_new;
+}
+
+async function getIncome(start, end) {
+    client = await setUpDatabase();
+
+    var query = 'SELECT SUM(b_cost) total FROM (SELECT * from booking LEFT JOIN roombooking ' +
+        ' ON booking.b_ref = roombooking.b_ref WHERE roombooking.checkin >= $1' +
+        ' AND roombooking.checkout <= $2) AS b_cost';
+    var values = [start, end]
+    const res1 = await client.query(query, values);
+
+    await client.end();
+
+    json = res1.rows;
+    var json_str_new = JSON.stringify(json);
+    console.log(json);
+    return json_str_new;
+}
+
+async function occupied(start, end) {
+    client = await setUpDatabase();
+
+    var query = 'SELECT room.r_no, room.r_class, r.checkin, r.checkout FROM room LEFT JOIN ' +
+        '(SELECT room.r_no, room.r_class, roombooking.checkin, roombooking.checkout FROM ' +
+        'room JOIN roombooking ON roombooking.r_no = room.r_no WHERE ' +
+        '((roombooking.checkin <= $1 AND roombooking.checkout > $1) ' +
+        'OR (roombooking.checkin < $2 AND roombooking.checkout >= $2))) ' +
+        'AS r ON room.r_no = r.r_no WHERE r.r_no IS NOT NULL ORDER BY room.r_no';
+    var values = [start, end]
+    const res1 = await client.query(query, values);
+
+    await client.end();
+
+    json = res1.rows;
+    var json_str_new = JSON.stringify(json);
+    console.log(json);
+    return json_str_new;
+}
+
+async function unoccupied(start, end) {
+    client = await setUpDatabase();
+
+    var query = 'SELECT room.r_no, room.r_class, r.checkin, r.checkout FROM room LEFT JOIN ' +
+        '(SELECT room.r_no, room.r_class, roombooking.checkin, roombooking.checkout FROM ' +
+        'room JOIN roombooking ON roombooking.r_no = room.r_no WHERE ' +
+        '((roombooking.checkin <= $1 AND roombooking.checkout > $1) ' +
+        'OR (roombooking.checkin < $2 AND roombooking.checkout >= $2))) ' +
+        'AS r ON room.r_no = r.r_no WHERE r.r_no IS NULL ORDER BY room.r_no';
+    var values = [start, end]
+    const res1 = await client.query(query, values);
+
+    await client.end();
+
+    json = res1.rows;
+    var json_str_new = JSON.stringify(json);
+    console.log(json);
+    return json_str_new;
 }
 
 //----------------------------------- Cleaner queries -----------------------------------

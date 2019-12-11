@@ -26,19 +26,6 @@ function saveNameForm() {
     return receptionData
 }
 
-// submit data for storage using the POST method
-function send_post_checkIn(path, data) {
-    fetch(path, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(res => {
-        res.json().then(checkInData)
-    })
-};
-
 function send_post_checkOutRoom(path, data) {
     fetch(path, {
         method: 'POST',

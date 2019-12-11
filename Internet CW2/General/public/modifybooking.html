@@ -1,7 +1,7 @@
-﻿<html lang="en">
+<html lang="en">
 
 <head>
-    <title>Reception</title>
+    <title>Modify booking</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Marimar Hotel template project">
@@ -18,7 +18,7 @@
     <!-- the lines above specify all the HTML definitions you'll need for validation -->
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="js/custom.js"></script>
-    <script src="js/reception.js"></script>
+    <script src="js/modify.js"></script>
 </head>
 
 <body>
@@ -35,9 +35,7 @@
                 <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-center justify-content-start">
                         <li><a href="/">Home</a></li>
-                        <li class="active"><a href="/checkInReception">Check in</a></li>
-                        <li><a href="/checkOutReception">Check out</a></li>
-                        <li><a href="/report">Reports</a></li>
+                        <li class="active"><a href="/modify">Modify booking</a></li>
                     </ul>
                 </nav>
             </div>
@@ -99,7 +97,6 @@
                         <li><a href="/">Home</a></li>
                         <li class="active"><a href="/checkInReception">Check in</a></li>
                         <li><a href="/checkOutReception">Check out</a></li>
-                        <li><a href="/report">Reports</a></li>
                     </ul>
                 </nav>
             </div>
@@ -112,12 +109,12 @@
         </div>
         <div class="formblock">
             <div class="section_title">
-                <h1> Reception </h1>
+                <h1> Modify booking </h1>
             </div>
             <!-- Intro Content -->
             <div class="left_half">
                 <div class="section_title">
-                    <h1> Retrieve by reference</h1>
+                    <h1> Get your booking by reference</h1>
                 </div>
                 <form id="FindBookingByRef">
                     <div class="row">
@@ -143,7 +140,7 @@
                     </div>
                 </form>
                 <div class="section_title">
-                    <h1> Retrieve by name</h1>
+                    <h1> Get your booking by name</h1>
                 </div>
                 <form id="FindBookingByName">
                     <div class="row">
@@ -180,7 +177,7 @@
                     </div>
                     <div class="row">
                         <div class="col-75">
-                            <input type="button" onclick="getbookingNameCI()" value="Find Booking" />
+                            <input type="button" onclick="getbookingName()" value="Find Booking" />
                         </div>
                     </div>
                 </form>
@@ -212,11 +209,6 @@
                 </div>
                 <div id="change_room">
 
-                </div>
-                <div class="row">
-                    <div class="col-75">
-                        <input type="button" onclick="getAllRooms()" value="All rooms"></input> <br>
-                    </div>
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@
 *********************************/
 
 * {
-    margin: 0;
+    margin: auto;
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -webkit-text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
@@ -126,11 +126,7 @@ p a:hover::after {
     color: #ffffff;
 }
 
-
-/* p::selection
-{
-	
-} */
+p::selection {}
 
 h1 {
     font-size: 48px;
@@ -166,13 +162,12 @@ h6 {
     margin-bottom: 0;
 }
 
-
-/* h1::selection,
+h1::selection,
 h2::selection,
 h3::selection,
 h4::selection,
 h5::selection,
-h6::selection {} */
+h6::selection {}
 
 img {
     max-width: 100%;
@@ -345,7 +340,7 @@ section {
     font-weight: 400;
     color: #150f24;
     z-index: 1;
-    margin-top: -20px;
+    margin-top: 10px;
 }
 
 .section_title>div {
@@ -729,95 +724,208 @@ section {
 
 
 /*********************************
-5. Home
+6. Intro
 *********************************/
 
-.home {
-    height: 200px;
-    background: transparent;
-}
-
-.home_container {
+.formblock {
+    background: #ffffff;
+    padding-top: 330px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    background: #ffffff;
     width: 100%;
     height: 100%;
-    padding-top: 228px;
+    margin: 0 auto;
 }
 
-.home_title h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    color: #ffffff;
-    font-style: italic;
-    font-size: 72px;
+.left_half {
+    background-color: #ffffff;
+    float: left;
+    width: 50%;
+    padding-bottom: 50px;
+}
+
+.right_half {
+    background-color: #ffffff;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-bottom: 50px;
+}
+
+input[type=text] {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+input[type=date] {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: rgba(14, 9, 35, 0.9);
+    color: white;
+    padding: 20px 20px 20px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 25%;
+    height: 10%;
+}
+
+input[type=button] {
+    background-color: rgba(14, 9, 35, 0.9);
+    color: white;
+    padding: 20px 20px 20px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 15vw;
+    height: 10%;
+}
+
+input[type=submit]:hover,
+input[type=button]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+#allRooms {
+    margin-bottom: 10px;
+}
+
+#sales_table {
+    width: 100%;
+}
+
+#sales_table tr {
+    width: 100%;
+}
+
+#sales_table th,
+td {
+    width: 25%;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+
+@media screen and (max-width: 600px) {
+    .formblock {
+        background: #ffffff;
+        padding-top: 100px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-align: center;
+        background: #ffffff;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+    }
+    .section_title {
+        margin-bottom: 5vh;
+        margin-top: 15px;
+    }
+    .left_half,
+    .right_half {
+        float: none;
+        text-align: left;
+        margin-left: 10px;
+        width: 90vw;
+    }
+    input[type=button],
+    input[type=submit] {
+        float: none;
+        width: 50vw;
+    }
+    input[type=text],
+    input[type=date] {
+        width: 65vw;
+    }
 }
 
 
 /*********************************
-6. Intro
+7. Footer
 *********************************/
 
-.intro {
-    background: #ffffff;
-    padding-top: 25vw;
-    padding-bottom: 110px;
+.footer {
+    display: block;
+    position: relative;
+    padding-top: 59px;
+    border-top: solid 2px #ff9000;
 }
 
-.intro_text {
-    margin-top: 49px;
+.footer_content {
+    margin-top: 67px;
+    padding-bottom: 80px;
 }
 
-.intro_button {
-    margin-top: 44px;
+.footer_col:first-child .footer_info>div {
+    padding-right: 20px;
 }
 
-.intro_image {
-    height: 100%;
+.footer_col:nth-child(3) .footer_info>div {
+    padding-left: 20px;
 }
 
-.intro_image>img {
-    display: none;
+.footer_info div {
+    font-size: 15px;
+    color: #bfc8d8;
+    font-weight: 400;
+    line-height: 1.8;
 }
 
-#housekeeping {
-    width: 80%;
-    float: left;
-    border: 1;
-}
-
-#housekeeping td,
-th {
-    text-align: center;
-    padding: 5px;
-}
-
-#statusSettings {
-    float: left;
-}
-
-#statusSettings button {
-    width: 100px;
-    margin-top: 2vh;
-    text-align: center;
-}
-
-@media screen and (max-width: 600px) {
-    .intro {
-        padding-top: 20vh;
-    }
-    #statusSettings {
-        position: relative;
-        float: none;
-    }
-    #statusSettings button {
-        width: 100px;
-        height: 10vh;
-        margin-left: 2vw;
-        text-align: center;
-        float: left;
-    }
-    #housekeeping {
-        width: 90vw;
-        float: left;
-        border: 1;
-    }
+.footer_bar {
+    height: 48px;
+    line-height: 48px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.15);
 }
