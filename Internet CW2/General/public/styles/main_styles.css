@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -991,7 +991,7 @@ section
 {
 	color: #ff9000;
 }
-
+attractionscontainer{text-align:left}
 /*********************************
 8. Rooms
 *********************************/
