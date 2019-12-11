@@ -220,16 +220,61 @@ app.get('/basketData', (req, res) => {
 
 app.post('/getBookingByRef', jsonParser, async(req, res) => {
     const data = req.body
-    getBookingByRef(data.b_ref).then(booking => {
-        console.log(JSON.parse(booking))
+    booking = {}
+    b_room = []
+    getBookingByRef(data.b_ref).then(cust => {
+        booking.cust = JSON.parse(cust)
+        getRoomsByRef(data.b_ref).then(async rooms => {
+            const loop = async _ => {
+                r = JSON.parse(rooms)
+                for (var i in r) {
+                    room = JSON.parse(await getRoom(r[i].r_no));
+                    b_room.push(room[0]);
+                }
+            }
+            await loop().then(_ => {
+                booking.rooms = b_room
+            })
+            res.send(booking);
+        })
+    })
+})
+
+app.post('/getBookingByRoom', jsonParser, async(req, res) => {
+    const data = req.body
+    console.log(data)
+    booking = {};
+    getRoom(data.r_no).then(room => {
+        console.log(room)
+        booking.room = room;
         res.send(booking);
     })
 })
 
 app.post('/getBookingByName', jsonParser, async(req, res) => {
     const data = req.body
-    getBookingByName(data.custName, data.checkIn, data.checkOut).then(booking => {
-        res.send(booking)
+    booking = {}
+    b_room = []
+    getBookingByName(data.custName, data.checkIn, data.checkOut).then(cust => {
+        booking.cust = JSON.parse(cust)
+        getRoomsByRef(booking.cust[0].b_ref).then(async rooms => {
+            const loop = async _ => {
+                r = JSON.parse(rooms)
+                for (var i in r) {
+                    room = JSON.parse(await getRoom(r[i].r_no));
+                    b_room.push(room[0]);
+                }
+            }
+            await loop().then(_ => {
+                booking.rooms = b_room
+            })
+        }).then(_ => {
+            viewPayments(data.custName, data.email, data.checkOut).then(c_det => {
+                booking.details = JSON.parse(c_det);
+                console.log(booking)
+                res.send(booking);
+            })
+        })
     })
 })
 
@@ -273,7 +318,6 @@ app.post('/completeBooking', jsonParser, async(req, res) => {
                     req.session.b_ref = b_ref
                     const createBooking = async _ => {
                         for (i = 0; i < basket.item.length; i++) {
-                            console.log(checkIn + " " + checkOut)
                             await createRoomBookings(basket.item[i].roomNo, data[0].b_ref, checkIn, checkOut)
                         }
                     }
@@ -296,14 +340,26 @@ app.get('/confirmationDetails', (req, res) => {
     data.basket = s.basket;
     data.numrooms = s.numrooms
     data.total = s.total;
-    console.log(data)
     res.send(data)
 })
 
-app.get('/checkIn', (req, res) => {
-    checkIn('C', data.b_ref).then(data => {
-        return res.send(data);
-    });
+app.post('/checkIn', jsonParser, (req, res) => {
+    data = req.body
+    const loop = async _ => {
+        for (var i in data.rooms) {
+            await checkIn('X', data.rooms[i])
+        }
+    }
+    loop().then(
+        res.redirect("/checkInReception")
+    )
+})
+
+app.post('/checkOut', jsonParser, (req, res) => {
+    data = req.body;
+    checkOut('C', data.b_ref, data.payment).then(_ => {
+        res.redirect("/checkOutReception")
+    })
 })
 
 //----------------------------------- Database setup -----------------------------------
@@ -356,6 +412,22 @@ async function getRate(roomCode) {
     // console.log(json_str_new);
     return json_str_new;
 }
+
+async function getRoom(r_no) {
+    client = await setUpDatabase();
+
+    const query = 'SELECT * FROM room WHERE r_no = $1'
+    const values = [r_no]
+    const res = await client.query(query, values);
+
+    await client.end();
+
+    json = res.rows;
+    var json_str_new = JSON.stringify(json);
+    // console.log(json_str_new);
+    return json_str_new;
+}
+
 
 //----------------------------------- Customer Details -----------------------------------
 async function getAvailableRooms(checkIn, checkOut, roomType) {
@@ -506,6 +578,21 @@ async function getBookingByRef(bookingRef) {
     return json_str_new
 }
 
+async function getRoomsByRef(bookingRef) {
+    client = await setUpDatabase();
+
+    var query = 'SELECT * FROM roombooking WHERE b_ref = $1'
+    var values = [bookingRef];
+    const res1 = await client.query(query, values);
+
+    await client.end();
+
+    json = res1.rows;
+    var json_str_new = JSON.stringify(json);
+    // console.log(json);
+    return json_str_new
+}
+
 async function getRoomStatus() {
     client = await setUpDatabase();
 
@@ -519,12 +606,11 @@ async function getRoomStatus() {
     console.log(json);
 }
 
-async function checkIn(status, booking_ref) {
+async function checkIn(status, r_no) {
     client = await setUpDatabase();
 
-    var query = 'UPDATE room SET r_status = $1 WHERE r_no = ' +
-        '(SELECT r_no FROM roombooking WHERE b_ref = $2)';
-    var values = [status, booking_ref]
+    var query = 'UPDATE room SET r_status = $1 WHERE r_no =$2';
+    var values = [status, r_no]
     const res1 = await client.query(query, values);
 
     await client.end();
@@ -576,35 +662,22 @@ async function checkOutByRoom(status, room_no, checkOut, payment) {
     console.log(json);
 }
 
-async function getPaymentType(customer_Name) {
+async function viewPayments(customer_name, customer_email, checkOut) {
     client = await setUpDatabase();
 
-    var query = 'SELECT c_cardtype, c_cardexp, c_cardno FROM customer WHERE c_name = $1'
-    var values = [customer_Name]
-    const res1 = await client.query(query, values);
-
-    await client.end();
-
-    json = res1.rows;
-    var json_str_new = JSON.stringify(json);
-    console.log(json);
-}
-
-async function viewPayments(customer_name, checkOut) {
-    client = await setUpDatabase();
-
-    var query = 'SELECT cust.c_name, cust.c_address, cust.c_cardtype, cust.c_cardexp, ' +
+    var query = 'SELECT cust.c_name, cust.c_email, cust.c_address, cust.c_cardtype, cust.c_cardexp, ' +
         'cust.c_cardno, b.b_cost, b.b_outstanding, rb.checkin, rb.checkout, rb.r_no ' +
         'FROM customer cust JOIN booking b ON cust.c_no = b.c_no JOIN roombooking rb ON b.b_ref = rb.b_ref ' +
-        'WHERE cust.c_name = $1 AND rb.checkout = $2 '
-    var values = [customer_name, checkOut]
+        'WHERE cust.c_name = $1 AND cust.c_email = $2 AND rb.checkout = $3 '
+    var values = [customer_name, customer_email, checkOut]
     const res1 = await client.query(query, values);
 
     await client.end();
 
     json = res1.rows;
     var json_str_new = JSON.stringify(json);
-    console.log(json_str_new);
+    // console.log(json_str_new);
+    return json_str_new
 }
 
 //----------------------------------- Cleaner queries -----------------------------------
@@ -677,5 +750,6 @@ async function changeStatus(status, roomNo) {
 // checkOut('C', 13011, 60)
 // checkOutByRoom('C', 101, '2019-01-31', 60)
 // getPaymentType('Danny Keenan')
+
 
 // viewPayments('Ann Hinchcliffe', '2019-01-16')res.sendFile('/index.html');

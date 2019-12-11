@@ -760,7 +760,32 @@ section {
     padding-bottom: 50px;
 }
 
+#b_data {
+    margin-bottom: 2vh;
+}
+
+.c_booking {
+    width: 80%;
+    margin-bottom: 2vh;
+}
+
+.c_booking tr td {
+    color: black;
+}
+
+.c_booking td {
+    width: 25%;
+}
+
 input[type=text] {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+input[type=date] {
     width: 50%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -777,6 +802,21 @@ input[type=submit] {
     background-color: rgba(14, 9, 35, 0.9);
     color: white;
     padding: 20px 20px 20px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 25%;
+    height: 5%;
+}
+
+input[type=button] {
+    background-color: rgba(14, 9, 35, 0.9);
+    color: white;
+    padding: 20px 20px 20px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -788,10 +828,22 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
+input[type=button]:hover {
+    background-color: #45a049;
+}
+
 .container {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
+}
+
+#allRoom {
+    margin-bottom: 10px;
+}
+
+#all_room_table {
+    width: 60%;
 }
 
 #Payment {

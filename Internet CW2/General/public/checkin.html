@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
     <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="styles/Reception.css">
+    <link rel="stylesheet" type="text/css" href="styles/checkin.css">
     <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
     <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
     <!-- the lines above specify all the HTML definitions you'll need for validation -->
@@ -124,6 +124,14 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-25">
+                            <label for="cname">Email</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="r_email" size="25" placeholder="Enter customer email here">
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-75">
                             <input type="button" onclick="getbookingRef()" value="Find Booking" />
                         </div>
@@ -139,6 +147,14 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="cName" size="25" placeholder="Enter customer name here">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="cname">Email</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="email" size="25" placeholder="Enter customer email here">
                         </div>
                     </div>
                     <div class="row">
@@ -159,8 +175,7 @@
                     </div>
                     <div class="row">
                         <div class="col-75">
-                            <input type="button" onclick="getbookingName()" value="Find Booking" />
-                            <input type="submit" onclick="checkIn()" value="Check In" />
+                            <input type="button" onclick="getbookingNameCI()" value="Find Booking" />
                         </div>
                     </div>
                 </form>
@@ -168,26 +183,33 @@
 
 
             <div class="right_half">
-                <table id="c_booking">
+                <div id="b_data">
+                    <div id="c_booking_title">
 
-                </table>
-                <table id="housekeeping">
-                    <thead>
-                        <tr>
-                            <th>Number | </th>
-                            <th>Type | </th>
-                            <th>Status | </th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody id="info"></tbody>
-                </table>
-                <form action="/changestatus" method="POST">
-                </form>
-                <button type="button" onclick="getAllRooms()">All rooms</button> <br>
+                    </div>
+                    <table id="c_booking" class="c_booking">
+
+                    </table>
+                    <div id="room_container">
+                        <div id="room_container_title">
+
+                        </div>
+                        <table id="c_rooms" class="c_booking">
+
+                        </table>
+                    </div>
+                    <div id="c_button">
+
+                    </div>
+                </div>
+                <div id="allRoom">
+
+                </div>
+                <div id="change_room">
+
+                </div>
+                <input type="button" onclick="getAllRooms()" value="All rooms"></input> <br>
             </div>
-
-            <button onclick=a href="/bookingForm">Telephone/In-Person Booking</button>
         </div>
 
 
