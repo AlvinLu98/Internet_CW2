@@ -237,7 +237,7 @@ app.post('/findCust', jsonParser, (req, res) => {
             data.name = cust[0].c_name;
             data.email = cust[0].c_email;
             data.address = cust[0].c_address;
-            req.session.customer = data;
+            req.session.customer = JSON.stringify(data);
             res.send({ "result": true });
         } else {
             res.status(200).send({ "result": false });
