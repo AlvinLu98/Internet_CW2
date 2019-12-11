@@ -3,7 +3,6 @@ function saveRoomForm() {
     // create an empty object
     var receptionData = {}; // showing elements added dynamically
     receptionData.r_no = $('#roomNo').val(); //get booking ref
-    receptionData.email = $('#r_email').val(); //get booking ref
     return receptionData
 }
 
@@ -80,6 +79,7 @@ function clearData() {
     $('#b_ref').val("");
     $('#room').val("");
     $('#cName').val("");
+    $('#r_email').val("");
     $('#email').val("");
     $('#cidate').val("");
     $('#codate').val("");
@@ -101,7 +101,7 @@ function checkOutDataRoom(data) {
         "<td>" + room[0].r_status + "</td>" +
         "<td>" + room[0].r_notes + "</td></tr>";
     $('#c_rooms').append(row)
-    $('#c_button').append('<input type="submit" onclick="checkOut()" value="Check Out" />')
+    $('#c_button').append('<form><input type="submit" onclick="checkOutRoom()" value="Check Out" /></form>')
 }
 
 function receptionDataCI(data) {
@@ -114,7 +114,9 @@ function receptionDataCI(data) {
         "<tr><td>Check out: </td><td>" + data.cust[0].checkout.substr(0, 10) + "</td></tr>" +
         ">tr></tr><tr><td>Card no: </td><td>" + data.details[0].c_cardno + "</td></tr>" +
         "<tr><td>Card type: </td><td>" + data.details[0].c_cardtype + "</td></tr>" +
-        "<tr><td>Card expiry: </td><td>" + data.details[0].c_cardexp + "</td></tr>";
+        "<tr><td>Card expiry: </td><td>" + data.details[0].c_cardexp + "</td></tr>" +
+        "<tr><td>Cost: </td><td>" + data.details[0].b_cost + "</td></tr>" +
+        "<tr><td>Outstanding: </td><td>" + data.details[0].b_cost + "</td></tr>";
     $('#c_booking').append(rows)
     $('#room_container_title').append("<h4>Rooms</h4>")
     $('#c_rooms').append("<tr><th>no</th><th>type</th><th>status</th><th>notes</th></tr>")
@@ -217,7 +219,7 @@ function onError(error) {
 
 function getbookingRef() {
     data = saveRefForm();
-    send_post_receptionData('getBookingByRef', data)
+    send_post_receptionDataCI('getBookingByRef', data)
 }
 
 function getbookingRoom() {
@@ -261,7 +263,6 @@ function checkIn() {
 
 function checkOut() {
     var row = $('#c_booking tr').find('td:eq(0):contains(Booking ref: )').parent();
-    alert(row[0].cells[1].innerHTML)
     const b_ref = row[0].cells[1].innerHTML
     data = {}
     data.b_ref = b_ref;
@@ -279,6 +280,18 @@ function send_post_checkOut(path, data) {
     })
 };
 
-function viewPayments() {
-    fetch('getPaymentType').then(onSuccess, onError).then(onStreamProcessed);
+function checkOutRoom() {
+    var row = $('#c_rooms tr').eq(1)
+    const b_ref = row[0].cells[1].innerHTML
+    send_post_CO("checkOutRoom", data)
 }
+
+function send_post_CO(path, data) {
+    fetch(path, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+};
