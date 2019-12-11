@@ -758,7 +758,7 @@ section {
 
 .intro {
     background: #ffffff;
-    padding-top: 142px;
+    padding-top: 25vw;
     padding-bottom: 110px;
 }
 
@@ -791,11 +791,33 @@ th {
 }
 
 #statusSettings {
-    float: right;
+    float: left;
 }
 
 #statusSettings button {
     width: 100px;
     margin-top: 2vh;
     text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    .intro {
+        padding-top: 20vh;
+    }
+    #statusSettings {
+        position: relative;
+        float: none;
+    }
+    #statusSettings button {
+        width: 100px;
+        height: 10vh;
+        margin-left: 2vw;
+        text-align: center;
+        float: left;
+    }
+    #housekeeping {
+        width: 90vw;
+        float: left;
+        border: 1;
+    }
 }

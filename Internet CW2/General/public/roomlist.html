@@ -145,7 +145,7 @@
                             <table id="details_table">
 
                             </table>
-                            <form action="/bookingForm">
+                            <form action="/rooms">
                                 <button type="submit" action="/rooms">Change</button>
                             </form>
                         </div>
@@ -185,8 +185,8 @@
 
                             </table>
                         </div>
-                        <form id="goToCheckOut" action="/bookingForm">
-                            <button type="submit" action="/bookingForm">Go to Checkout</button>
+                        <form id="goToCheckOut" onsubmit="return checkout()" action="/bookingForm">
+                            <button type="submit">Go to Checkout</button>
                         </form>
                     </div>
                 </div>
