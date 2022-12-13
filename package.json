@@ -12,7 +12,7 @@
         "nodemon": "^2.0.1"
     },
     "dependencies": {
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "express-generator": "^4.16.1",
         "pg": "^7.14.0",
         "uuid": "^3.3.3"
